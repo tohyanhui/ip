@@ -10,6 +10,8 @@ public class Momo {
             + "|_|  |_|\\___/|_| |_| |_|\\___/ \n";
     private static final String MESSAGE_GREET = "Hello I'm\n" + LOGO + "\n" + "What can I do for you?";
     private static final String MESSAGE_BYE = "Bye. Hope to see you again soon!";
+    private final String[] tasks = new String[100];
+    private int numTasks = 0;
 
 
     // Indents every line of the text
@@ -24,13 +26,24 @@ public class Momo {
         System.out.println();
     }
 
+    private void addTask(String task) {
+        tasks[numTasks] = task;
+        numTasks++;
+    }
+
     public static void main(String[] args) {
+        Momo momo = new Momo();
         printPrettyMessage(MESSAGE_GREET);
 
         Scanner scanner = new Scanner(System.in);
         String input = scanner.nextLine();
         while (!input.equals("bye")) {
-            printPrettyMessage(input);
+            if (!input.equals("list")) { // Add task
+                momo.addTask(input);
+                printPrettyMessage("added: " + input);
+            } else {
+                printPrettyMessage(input);
+            }
             input = scanner.nextLine();
         }
         scanner.close();
