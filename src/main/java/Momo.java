@@ -1,4 +1,6 @@
 import java.util.Scanner;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class Momo {
     private static final String HORIZONTAL_LINE = "____________________________________________________________";
@@ -19,9 +21,14 @@ public class Momo {
         return "\t" + text.replace("\n", "\n\t");
     }
 
+    // Adds a space to every line of the text
+    private static String space(String text) {
+        return " " + text.replace("\n", "\n ");
+    }
+
     private static void printPrettyMessage(String message) {
         System.out.println(indent(HORIZONTAL_LINE));
-        System.out.println(indent(message));
+        System.out.println(indent(space(message)));
         System.out.println(indent(HORIZONTAL_LINE));
         System.out.println();
     }
@@ -41,8 +48,13 @@ public class Momo {
             if (!input.equals("list")) { // Add task
                 momo.addTask(input);
                 printPrettyMessage("added: " + input);
-            } else {
-                printPrettyMessage(input);
+            } else { // Else input equals "list"
+                int numTasks = momo.numTasks;
+                String[] tasks = momo.tasks;
+                String listMessage = IntStream.range(0, numTasks)
+                        .mapToObj(x -> String.format("%d. %s", x + 1, tasks[x]))
+                        .collect(Collectors.joining("\n"));
+                printPrettyMessage(listMessage);
             }
             input = scanner.nextLine();
         }
