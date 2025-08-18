@@ -12,7 +12,7 @@ public class Momo {
             + "|_|  |_|\\___/|_| |_| |_|\\___/ \n";
     private static final String MESSAGE_GREET = "Hello I'm\n" + LOGO + "\n" + "What can I do for you?";
     private static final String MESSAGE_BYE = "Bye. Hope to see you again soon!";
-    private final String[] tasks = new String[100];
+    private final Task[] tasks = new Task[100];
     private int numTasks = 0;
 
 
@@ -33,7 +33,7 @@ public class Momo {
         System.out.println();
     }
 
-    private void addTask(String task) {
+    private void addTask(Task task) {
         tasks[numTasks] = task;
         numTasks++;
     }
@@ -46,13 +46,14 @@ public class Momo {
         String input = scanner.nextLine();
         while (!input.equals("bye")) {
             if (!input.equals("list")) { // Add task
-                momo.addTask(input);
-                printPrettyMessage("added: " + input);
+                Task task = new Task(input);
+                momo.addTask(task);
+                printPrettyMessage("added: " + task.toString());
             } else { // Else input equals "list"
                 int numTasks = momo.numTasks;
-                String[] tasks = momo.tasks;
+                Task[] tasks = momo.tasks;
                 String listMessage = IntStream.range(0, numTasks)
-                        .mapToObj(x -> String.format("%d. %s", x + 1, tasks[x]))
+                        .mapToObj(x -> String.format("%d.%s", x + 1, tasks[x].toString()))
                         .collect(Collectors.joining("\n"));
                 printPrettyMessage(listMessage);
             }
