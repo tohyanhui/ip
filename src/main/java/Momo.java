@@ -42,6 +42,10 @@ public class Momo {
         tasks[index].markAsDone();
     }
 
+    private void unmarkTask(int index) {
+        tasks[index].unmarkFromDone();
+    }
+
     public static void main(String[] args) {
         Momo momo = new Momo();
         printPrettyMessage(MESSAGE_GREET);
@@ -60,6 +64,10 @@ public class Momo {
                 int index = Integer.parseInt(input.split(" ")[1]) - 1;
                 momo.markTask(index);
                 printPrettyMessage("Nice! I've marked this task as done:\n  " + momo.tasks[index].toString());
+            } else if (input.startsWith("unmark ")) {
+                int index = Integer.parseInt(input.split(" ")[1]) - 1;
+                momo.unmarkTask(index);
+                printPrettyMessage("OK, I've marked this task as not done yet:\n  " + momo.tasks[index].toString());
             } else { // Add task
                 Task task = new Task(input);
                 momo.addTask(task);
