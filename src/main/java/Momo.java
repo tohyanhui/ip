@@ -38,6 +38,10 @@ public class Momo {
         numTasks++;
     }
 
+    private void markTask(int index) {
+        tasks[index].markAsDone();
+    }
+
     public static void main(String[] args) {
         Momo momo = new Momo();
         printPrettyMessage(MESSAGE_GREET);
@@ -45,17 +49,21 @@ public class Momo {
         Scanner scanner = new Scanner(System.in);
         String input = scanner.nextLine();
         while (!input.equals("bye")) {
-            if (!input.equals("list")) { // Add task
-                Task task = new Task(input);
-                momo.addTask(task);
-                printPrettyMessage("added: " + task.toString());
-            } else { // Else input equals "list"
+            if (input.equals("list")) {
                 int numTasks = momo.numTasks;
                 Task[] tasks = momo.tasks;
                 String listMessage = IntStream.range(0, numTasks)
                         .mapToObj(x -> String.format("%d.%s", x + 1, tasks[x].toString()))
                         .collect(Collectors.joining("\n"));
-                printPrettyMessage(listMessage);
+                printPrettyMessage("Here are the tasks in your list:\n" + listMessage);
+            } else if (input.startsWith("mark ")) {
+                int index = Integer.parseInt(input.split(" ")[1]) - 1;
+                momo.markTask(index);
+                printPrettyMessage("Nice! I've marked this task as done:\n  " + momo.tasks[index].toString());
+            } else { // Add task
+                Task task = new Task(input);
+                momo.addTask(task);
+                printPrettyMessage("added: " + task.toString());
             }
             input = scanner.nextLine();
         }
