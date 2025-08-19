@@ -71,17 +71,30 @@ public class Momo {
                     String errorFix = "Fix: Try \"mark <task number>\" instead!";
                     throw new MomoException(errorDetail + "\n" + errorFix);
                 } else if (input.startsWith("mark ")) {
-                    int index = Integer.parseInt(input.split(" ")[1]) - 1;
-                    momo.markTask(index);
-                    printPrettyMessage("Nice! I've marked this task as done:\n  " + momo.tasks[index].toString());
+                    try {
+                        int index = Integer.parseInt(input.split(" ")[1]) - 1;
+                        momo.markTask(index);
+                        printPrettyMessage("Nice! I've marked this task as done:\n  " + momo.tasks[index].toString());
+                    } catch (NumberFormatException e) {
+                        String errorDetail = "The task number provided is not an integer!";
+                        String errorFix = "Fix: Try \"mark <integer>\" instead!";
+                        throw new MomoException(errorDetail + "\n" + errorFix);
+                    }
                 } else if (input.equals("unmark")) {
                     String errorDetail = "The task number to unmark is not provided!";
                     String errorFix = "Fix: Try \"unmark <task number>\" instead!";
                     throw new MomoException(errorDetail + "\n" + errorFix);
                 } else if (input.startsWith("unmark ")) {
-                    int index = Integer.parseInt(input.split(" ")[1]) - 1;
-                    momo.unmarkTask(index);
-                    printPrettyMessage("OK, I've marked this task as not done yet:\n  " + momo.tasks[index].toString());
+                    try {
+                        int index = Integer.parseInt(input.split(" ")[1]) - 1;
+                        momo.unmarkTask(index);
+                        printPrettyMessage("OK, I've marked this task as not done yet:\n  " 
+                                + momo.tasks[index].toString());
+                    } catch (NumberFormatException e) {
+                        String errorDetail = "The task number provided is not an integer!";
+                        String errorFix = "Fix: Try \"unmark <integer>\" instead!";
+                        throw new MomoException(errorDetail + "\n" + errorFix);
+                    }
                 } else if (input.equals("todo")) {
                     String errorDetail = "The description of the todo is empty!";
                     String errorFix = "Fix: Try \"todo <description>\" instead!";
