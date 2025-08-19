@@ -4,12 +4,12 @@ import java.util.stream.IntStream;
 
 public class Momo {
     private static final String HORIZONTAL_LINE = "____________________________________________________________";
-    private static final String LOGO = " __  __                       \n"
-            + "|  \\/  |                      \n"
-            + "| \\  / | ___  _ __ ___   ___  \n"
-            + "| |\\/| |/ _ \\| '_ ` _ \\ / _ \\ \n"
+    private static final String LOGO = " __  __\n"
+            + "|  \\/  |\n"
+            + "| \\  / | ___  _ __ ___   ___\n"
+            + "| |\\/| |/ _ \\| '_ ` _ \\ / _ \\\n"
             + "| |  | | (_) | | | | | | (_) |\n"
-            + "|_|  |_|\\___/|_| |_| |_|\\___/ \n";
+            + "|_|  |_|\\___/|_| |_| |_|\\___/\n";
     private static final String MESSAGE_GREET = "Hello I'm\n" + LOGO + "\n" + "What can I do for you?";
     private static final String MESSAGE_BYE = "Bye. Hope to see you again soon!";
     private final Task[] tasks = new Task[100];
@@ -88,6 +88,8 @@ public class Momo {
                 Task task = new Event(parsedInput[0], parsedStartEndTime[0], parsedStartEndTime[1]);
                 momo.addTask(task);
                 printPrettyMessage(momo.createAddTaskMessage(task));
+            } else {
+                printPrettyMessage(input);
             }
             input = scanner.nextLine();
         }
