@@ -66,10 +66,18 @@ public class Momo {
                             .mapToObj(x -> String.format("%d.%s", x + 1, tasks[x].toString()))
                             .collect(Collectors.joining("\n"));
                     printPrettyMessage("Here are the tasks in your list:\n" + listMessage);
+                } else if (input.equals("mark")) {
+                    String errorDetail = "The task number to mark is not provided!";
+                    String errorFix = "Fix: Try \"mark <task number>\" instead!";
+                    throw new MomoException(errorDetail + "\n" + errorFix);
                 } else if (input.startsWith("mark ")) {
                     int index = Integer.parseInt(input.split(" ")[1]) - 1;
                     momo.markTask(index);
                     printPrettyMessage("Nice! I've marked this task as done:\n  " + momo.tasks[index].toString());
+                } else if (input.equals("unmark")) {
+                    String errorDetail = "The task number to unmark is not provided!";
+                    String errorFix = "Fix: Try \"unmark <task number>\" instead!";
+                    throw new MomoException(errorDetail + "\n" + errorFix);
                 } else if (input.startsWith("unmark ")) {
                     int index = Integer.parseInt(input.split(" ")[1]) - 1;
                     momo.unmarkTask(index);
