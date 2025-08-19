@@ -77,6 +77,11 @@ public class Momo {
                 Task task = new Todo(description);
                 momo.addTask(task);
                 printPrettyMessage(momo.createAddTaskMessage(task));
+            } else if (input.startsWith("deadline ")) {
+                String[] parsedInput = input.substring(9).split(" /by ");
+                Task task = new Deadline(parsedInput[0], parsedInput[1]);
+                momo.addTask(task);
+                printPrettyMessage(momo.createAddTaskMessage(task));
             }
             input = scanner.nextLine();
         }
