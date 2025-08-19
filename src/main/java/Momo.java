@@ -98,6 +98,10 @@ public class Momo {
                         String errorFix = "Fix: Try \"deadline <description> /by <date/time>\" instead!";
                         throw new MomoException(errorDetail + "\n" + errorFix);
                     }
+                } else if (input.equals("event")) {
+                    String errorDetail = "The description of the event is empty!";
+                    String errorFix = "Fix: Try \"event <description> /from <date/time> /to\n<date/time>\" instead!";
+                    throw new MomoException(errorDetail + "\n" + errorFix);
                 } else if (input.startsWith("event ")) {
                     String[] parsedInput = input.substring(6).split(" /from ");
                     String[] parsedStartEndTime = parsedInput[1].split(" /to ");

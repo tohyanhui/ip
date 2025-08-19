@@ -2,6 +2,7 @@ blah
 todo
 deadline
 deadline return book
+event
 todo read book
 list
 deadline return book /by Sunday
