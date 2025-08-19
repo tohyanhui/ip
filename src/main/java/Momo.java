@@ -46,6 +46,10 @@ public class Momo {
         tasks[index].unmarkFromDone();
     }
 
+    private String createAddTaskMessage(Task task) {
+        return "Got it. I've added this task:\n" +  space(space(task.toString())) + "\nNow you have " + this.numTasks + " tasks in the list.";
+    }
+
     public static void main(String[] args) {
         Momo momo = new Momo();
         printPrettyMessage(MESSAGE_GREET);
@@ -68,10 +72,11 @@ public class Momo {
                 int index = Integer.parseInt(input.split(" ")[1]) - 1;
                 momo.unmarkTask(index);
                 printPrettyMessage("OK, I've marked this task as not done yet:\n  " + momo.tasks[index].toString());
-            } else { // Add task
-                Task task = new Task(input);
+            } else if (input.startsWith("todo ")) {
+                String description = input.substring(5);
+                Task task = new Todo(description);
                 momo.addTask(task);
-                printPrettyMessage("added: " + task.toString());
+                printPrettyMessage(momo.createAddTaskMessage(task));
             }
             input = scanner.nextLine();
         }
