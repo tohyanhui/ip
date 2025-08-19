@@ -82,6 +82,12 @@ public class Momo {
                 Task task = new Deadline(parsedInput[0], parsedInput[1]);
                 momo.addTask(task);
                 printPrettyMessage(momo.createAddTaskMessage(task));
+            } else if (input.startsWith("event ")) {
+                String[] parsedInput = input.substring(6).split(" /from ");
+                String[] parsedStartEndTime = parsedInput[1].split(" /to ");
+                Task task = new Event(parsedInput[0], parsedStartEndTime[0], parsedStartEndTime[1]);
+                momo.addTask(task);
+                printPrettyMessage(momo.createAddTaskMessage(task));
             }
             input = scanner.nextLine();
         }
