@@ -89,9 +89,15 @@ public class Momo {
                     throw new MomoException(errorDetail + "\n" + errorFix);
                 } else if (input.startsWith("deadline ")) {
                     String[] parsedInput = input.substring(9).split(" /by ");
-                    Task task = new Deadline(parsedInput[0], parsedInput[1]);
-                    momo.addTask(task);
-                    printPrettyMessage(momo.createAddTaskMessage(task));
+                    try {
+                        Task task = new Deadline(parsedInput[0], parsedInput[1]);
+                        momo.addTask(task);
+                        printPrettyMessage(momo.createAddTaskMessage(task));
+                    } catch (ArrayIndexOutOfBoundsException e) {
+                        String errorDetail = "The deadline is missing \"/by\"!";
+                        String errorFix = "Fix: Try \"deadline <description> /by <date/time>\" instead!";
+                        throw new MomoException(errorDetail + "\n" + errorFix);
+                    }
                 } else if (input.startsWith("event ")) {
                     String[] parsedInput = input.substring(6).split(" /from ");
                     String[] parsedStartEndTime = parsedInput[1].split(" /to ");
