@@ -104,10 +104,17 @@ public class Momo {
                     throw new MomoException(errorDetail + "\n" + errorFix);
                 } else if (input.startsWith("event ")) {
                     String[] parsedInput = input.substring(6).split(" /from ");
-                    String[] parsedStartEndTime = parsedInput[1].split(" /to ");
-                    Task task = new Event(parsedInput[0], parsedStartEndTime[0], parsedStartEndTime[1]);
-                    momo.addTask(task);
-                    printPrettyMessage(momo.createAddTaskMessage(task));
+                    try {
+                        String[] parsedStartEndTime = parsedInput[1].split(" /to ");
+                        Task task = new Event(parsedInput[0], parsedStartEndTime[0], parsedStartEndTime[1]);
+                        momo.addTask(task);
+                        printPrettyMessage(momo.createAddTaskMessage(task));
+                    } catch (ArrayIndexOutOfBoundsException e) {
+                        String errorDetail = "The event is missing \"/from\" or \"/to\"!";
+                        String errorFix = "Fix: Try \"event <description> /from <date/time> " +
+                                "/to\n<date/time>\" instead!";
+                        throw new MomoException(errorDetail + "\n" + errorFix);
+                    }
                 } else {
                     String errorDetail = "\"" + input + "\"" + " is not a valid command!";
                     String errorFix = "Fix: Retry with a valid command!";

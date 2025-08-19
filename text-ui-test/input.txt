@@ -3,6 +3,9 @@ todo
 deadline
 deadline return book
 event
+event project meeting
+event project meeting /from 2pm
+event project meeting /to 4pm
 todo read book
 list
 deadline return book /by Sunday
