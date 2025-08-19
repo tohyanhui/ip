@@ -1,5 +1,6 @@
 blah
 todo
+deadline
 todo read book
 list
 deadline return book /by Sunday

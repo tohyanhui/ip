@@ -83,6 +83,10 @@ public class Momo {
                     Task task = new Todo(description);
                     momo.addTask(task);
                     printPrettyMessage(momo.createAddTaskMessage(task));
+                } else if (input.equals("deadline")) {
+                    String errorDetail = "The description of the deadline is empty!";
+                    String errorFix = "Fix: Try \"deadline <description> /by <date/time>\" instead!";
+                    throw new MomoException(errorDetail + "\n" + errorFix);
                 } else if (input.startsWith("deadline ")) {
                     String[] parsedInput = input.substring(9).split(" /by ");
                     Task task = new Deadline(parsedInput[0], parsedInput[1]);
