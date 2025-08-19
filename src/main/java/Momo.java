@@ -47,7 +47,8 @@ public class Momo {
     }
 
     private String createAddTaskMessage(Task task) {
-        return "Got it. I've added this task:\n" +  space(space(task.toString())) + "\nNow you have " + this.numTasks + " tasks in the list.";
+        return "Got it. I've added this task:\n" +  space(space(task.toString())) 
+                + "\nNow you have " + this.numTasks + " tasks in the list.";
     }
 
     public static void main(String[] args) {
@@ -55,7 +56,7 @@ public class Momo {
         printPrettyMessage(MESSAGE_GREET);
 
         Scanner scanner = new Scanner(System.in);
-        String input = scanner.nextLine();
+        String input = scanner.nextLine().trim();
         while (!input.equals("bye")) {
             try {
                 if (input.equals("list")) {
@@ -73,8 +74,10 @@ public class Momo {
                     int index = Integer.parseInt(input.split(" ")[1]) - 1;
                     momo.unmarkTask(index);
                     printPrettyMessage("OK, I've marked this task as not done yet:\n  " + momo.tasks[index].toString());
-                } else if (input.trim().equals("todo")) {
-                    throw new MomoException("The description of the todo is empty!\nTry \"todo <description>\" instead!");
+                } else if (input.equals("todo")) {
+                    String errorDetail = "The description of the todo is empty!";
+                    String errorFix = "Fix: Try \"todo <description>\" instead!";
+                    throw new MomoException(errorDetail + "\n" + errorFix);
                 } else if (input.startsWith("todo ")) {
                     String description = input.substring(5);
                     Task task = new Todo(description);
@@ -92,12 +95,14 @@ public class Momo {
                     momo.addTask(task);
                     printPrettyMessage(momo.createAddTaskMessage(task));
                 } else {
-                    printPrettyMessage(input);
+                    String errorDetail = "\"" + input + "\"" + " is not a valid command!";
+                    String errorFix = "Fix: Retry with a valid command!";
+                    throw new MomoException(errorDetail + "\n" + errorFix);
                 }
             } catch (MomoException e) {
                 printPrettyMessage(e.getMessage());
             }
-            input = scanner.nextLine();
+            input = scanner.nextLine().trim();
         }
         scanner.close();
 
