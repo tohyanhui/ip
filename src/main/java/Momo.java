@@ -57,39 +57,45 @@ public class Momo {
         Scanner scanner = new Scanner(System.in);
         String input = scanner.nextLine();
         while (!input.equals("bye")) {
-            if (input.equals("list")) {
-                int numTasks = momo.numTasks;
-                Task[] tasks = momo.tasks;
-                String listMessage = IntStream.range(0, numTasks)
-                        .mapToObj(x -> String.format("%d.%s", x + 1, tasks[x].toString()))
-                        .collect(Collectors.joining("\n"));
-                printPrettyMessage("Here are the tasks in your list:\n" + listMessage);
-            } else if (input.startsWith("mark ")) {
-                int index = Integer.parseInt(input.split(" ")[1]) - 1;
-                momo.markTask(index);
-                printPrettyMessage("Nice! I've marked this task as done:\n  " + momo.tasks[index].toString());
-            } else if (input.startsWith("unmark ")) {
-                int index = Integer.parseInt(input.split(" ")[1]) - 1;
-                momo.unmarkTask(index);
-                printPrettyMessage("OK, I've marked this task as not done yet:\n  " + momo.tasks[index].toString());
-            } else if (input.startsWith("todo ")) {
-                String description = input.substring(5);
-                Task task = new Todo(description);
-                momo.addTask(task);
-                printPrettyMessage(momo.createAddTaskMessage(task));
-            } else if (input.startsWith("deadline ")) {
-                String[] parsedInput = input.substring(9).split(" /by ");
-                Task task = new Deadline(parsedInput[0], parsedInput[1]);
-                momo.addTask(task);
-                printPrettyMessage(momo.createAddTaskMessage(task));
-            } else if (input.startsWith("event ")) {
-                String[] parsedInput = input.substring(6).split(" /from ");
-                String[] parsedStartEndTime = parsedInput[1].split(" /to ");
-                Task task = new Event(parsedInput[0], parsedStartEndTime[0], parsedStartEndTime[1]);
-                momo.addTask(task);
-                printPrettyMessage(momo.createAddTaskMessage(task));
-            } else {
-                printPrettyMessage(input);
+            try {
+                if (input.equals("list")) {
+                    int numTasks = momo.numTasks;
+                    Task[] tasks = momo.tasks;
+                    String listMessage = IntStream.range(0, numTasks)
+                            .mapToObj(x -> String.format("%d.%s", x + 1, tasks[x].toString()))
+                            .collect(Collectors.joining("\n"));
+                    printPrettyMessage("Here are the tasks in your list:\n" + listMessage);
+                } else if (input.startsWith("mark ")) {
+                    int index = Integer.parseInt(input.split(" ")[1]) - 1;
+                    momo.markTask(index);
+                    printPrettyMessage("Nice! I've marked this task as done:\n  " + momo.tasks[index].toString());
+                } else if (input.startsWith("unmark ")) {
+                    int index = Integer.parseInt(input.split(" ")[1]) - 1;
+                    momo.unmarkTask(index);
+                    printPrettyMessage("OK, I've marked this task as not done yet:\n  " + momo.tasks[index].toString());
+                } else if (input.trim().equals("todo")) {
+                    throw new MomoException("The description of the todo is empty!\nTry \"todo <description>\" instead!");
+                } else if (input.startsWith("todo ")) {
+                    String description = input.substring(5);
+                    Task task = new Todo(description);
+                    momo.addTask(task);
+                    printPrettyMessage(momo.createAddTaskMessage(task));
+                } else if (input.startsWith("deadline ")) {
+                    String[] parsedInput = input.substring(9).split(" /by ");
+                    Task task = new Deadline(parsedInput[0], parsedInput[1]);
+                    momo.addTask(task);
+                    printPrettyMessage(momo.createAddTaskMessage(task));
+                } else if (input.startsWith("event ")) {
+                    String[] parsedInput = input.substring(6).split(" /from ");
+                    String[] parsedStartEndTime = parsedInput[1].split(" /to ");
+                    Task task = new Event(parsedInput[0], parsedStartEndTime[0], parsedStartEndTime[1]);
+                    momo.addTask(task);
+                    printPrettyMessage(momo.createAddTaskMessage(task));
+                } else {
+                    printPrettyMessage(input);
+                }
+            } catch (MomoException e) {
+                printPrettyMessage(e.getMessage());
             }
             input = scanner.nextLine();
         }
