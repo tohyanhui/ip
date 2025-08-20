@@ -80,6 +80,10 @@ public class Momo {
                             .mapToObj(x -> String.format("%d.%s", x + 1, momo.getTask(x).toString()))
                             .collect(Collectors.joining("\n"));
                     printPrettyMessage("Here are the tasks in your list:\n" + listMessage);
+                } else if (input.equals("delete")) {
+                    String errorDetail = "The task number to delete is not provided!";
+                    String errorFix = "Fix: Try \"delete <task number>\" instead!";
+                    throw new MomoException(errorDetail + "\n" + errorFix);
                 } else if (input.startsWith("delete ")) {
                     try {
                         int index = Integer.parseInt(input.split(" ")[1]) - 1;

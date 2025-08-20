@@ -161,6 +161,11 @@
 	____________________________________________________________
 
 	____________________________________________________________
+	 Nani?!? The task number to delete is not provided!
+	 Fix: Try "delete <task number>" instead!
+	____________________________________________________________
+
+	____________________________________________________________
 	 Noted. I've removed this task:
 	   [D][X] return book (by: Sunday)
 	 Now you have 3 tasks in the list.
