@@ -35,6 +35,10 @@ public class Momo {
     private void addTask(Task task) {
         tasks.add(task);
     }
+
+    private Task deleteTask(int index) {
+        return tasks.remove(index);
+    }
     
     private Task getTask(int index) {
         return tasks.get(index);
@@ -57,6 +61,11 @@ public class Momo {
                 + "\nNow you have " + computeNumTasks() + " tasks in the list.";
     }
 
+    private String createDeleteTaskMessage(Task task) {
+        return "Noted. I've removed this task:\n" +  space(space(task.toString()))
+                + "\nNow you have " + computeNumTasks() + " tasks in the list.";
+    }
+
     public static void main(String[] args) {
         Momo momo = new Momo();
         printPrettyMessage(MESSAGE_GREET);
@@ -71,6 +80,16 @@ public class Momo {
                             .mapToObj(x -> String.format("%d.%s", x + 1, momo.getTask(x).toString()))
                             .collect(Collectors.joining("\n"));
                     printPrettyMessage("Here are the tasks in your list:\n" + listMessage);
+                } else if (input.startsWith("delete ")) {
+                    try {
+                        int index = Integer.parseInt(input.split(" ")[1]) - 1;
+                        Task deletedTask = momo.deleteTask(index);
+                        printPrettyMessage(momo.createDeleteTaskMessage(deletedTask));
+                    } catch (NumberFormatException e) {
+                        String errorDetail = "The task number provided is not an integer!";
+                        String errorFix = "Fix: Try \"mark <integer>\" instead!";
+                        throw new MomoException(errorDetail + "\n" + errorFix);
+                    }
                 } else if (input.equals("mark")) {
                     String errorDetail = "The task number to mark is not provided!";
                     String errorFix = "Fix: Try \"mark <task number>\" instead!";

@@ -24,4 +24,6 @@ unmark 3
 list
 todo borrow book
 list
+delete 2
+list
 bye
