@@ -1,60 +1,23 @@
-import java.util.ArrayList;
-import java.util.Scanner;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class Momo {
-    private static final String HORIZONTAL_LINE = "____________________________________________________________";
-    private static final String LOGO = " __  __\n"
-            + "|  \\/  |\n"
-            + "| \\  / | ___  _ __ ___   ___\n"
-            + "| |\\/| |/ _ \\| '_ ` _ \\ / _ \\\n"
-            + "| |  | | (_) | | | | | | (_) |\n"
-            + "|_|  |_|\\___/|_| |_| |_|\\___/\n";
-    private static final String MESSAGE_GREET = "Hello I'm\n" + LOGO + "\n" + "What can I do for you?";
-    private static final String MESSAGE_BYE = "Bye. Hope to see you again soon!";
     private final TaskList tasks = new TaskList();
-
-    // Indents every line of the text
-    private static String indent(String text) {
-        return "\t" + text.replace("\n", "\n\t");
-    }
-
-    // Adds a space to every line of the text
-    private static String space(String text) {
-        return " " + text.replace("\n", "\n ");
-    }
-
-    private static void printPrettyMessage(String message) {
-        System.out.println(indent(HORIZONTAL_LINE));
-        System.out.println(indent(space(message)));
-        System.out.println(indent(HORIZONTAL_LINE));
-        System.out.println();
-    }
-
-    private String createAddTaskMessage(Task task) {
-        return "Got it. I've added this task:\n" +  space(space(task.toString())) 
-                + "\nNow you have " + tasks.size() + " tasks in the list.";
-    }
-
-    private String createDeleteTaskMessage(Task task) {
-        return "Noted. I've removed this task:\n" +  space(space(task.toString()))
-                + "\nNow you have " + tasks.size() + " tasks in the list.";
-    }
-
-    public static void main(String[] args) {
-        Momo momo = new Momo();
-        printPrettyMessage(MESSAGE_GREET);
-
-        Scanner scanner = new Scanner(System.in);
-        String input = scanner.nextLine().trim();
-        while (!input.equals("bye")) {
+    private final Ui ui = new Ui();
+    
+    public void run() {
+        ui.showWelcome();
+        boolean isExit = false;
+        while (!isExit) {
             try {
+                String input = ui.readCommand();
                 if (input.equals("list")) {
-                    String listMessage = IntStream.range(0, momo.tasks.size())
-                            .mapToObj(x -> String.format("%d.%s", x + 1, momo.tasks.getTask(x).toString()))
+                    String listMessage = IntStream.range(0, tasks.size())
+                            .mapToObj(x -> String.format("%d.%s", x + 1, tasks.getTask(x).toString()))
                             .collect(Collectors.joining("\n"));
-                    printPrettyMessage("Here are the tasks in your list:\n" + listMessage);
+                    ui.printPrettyMessage("Here are the tasks in your list:\n" + listMessage);
+                } else if (input.equals("bye")) {
+                    isExit = true;
                 } else if (input.equals("delete")) {
                     String errorDetail = "The task number to delete is not provided!";
                     String errorFix = "Fix: Try \"delete <task number>\" instead!";
@@ -62,8 +25,8 @@ public class Momo {
                 } else if (input.startsWith("delete ")) {
                     try {
                         int index = Integer.parseInt(input.split(" ")[1]) - 1;
-                        Task deletedTask = momo.tasks.deleteTask(index);
-                        printPrettyMessage(momo.createDeleteTaskMessage(deletedTask));
+                        Task deletedTask = tasks.deleteTask(index);
+                        ui.printPrettyMessage(ui.createDeleteTaskMessage(deletedTask, tasks));
                     } catch (NumberFormatException e) {
                         String errorDetail = "The task number provided is not an integer!";
                         String errorFix = "Fix: Try \"mark <integer>\" instead!";
@@ -76,8 +39,8 @@ public class Momo {
                 } else if (input.startsWith("mark ")) {
                     try {
                         int index = Integer.parseInt(input.split(" ")[1]) - 1;
-                        momo.tasks.markTask(index);
-                        printPrettyMessage("Nice! I've marked this task as done:\n  " + momo.tasks.getTask(index).toString());
+                        tasks.markTask(index);
+                        ui.printPrettyMessage("Nice! I've marked this task as done:\n  " + tasks.getTask(index).toString());
                     } catch (NumberFormatException e) {
                         String errorDetail = "The task number provided is not an integer!";
                         String errorFix = "Fix: Try \"mark <integer>\" instead!";
@@ -90,9 +53,9 @@ public class Momo {
                 } else if (input.startsWith("unmark ")) {
                     try {
                         int index = Integer.parseInt(input.split(" ")[1]) - 1;
-                        momo.tasks.unmarkTask(index);
-                        printPrettyMessage("OK, I've marked this task as not done yet:\n  " 
-                                + momo.tasks.getTask(index).toString());
+                        tasks.unmarkTask(index);
+                        ui.printPrettyMessage("OK, I've marked this task as not done yet:\n  "
+                                + tasks.getTask(index).toString());
                     } catch (NumberFormatException e) {
                         String errorDetail = "The task number provided is not an integer!";
                         String errorFix = "Fix: Try \"unmark <integer>\" instead!";
@@ -105,8 +68,8 @@ public class Momo {
                 } else if (input.startsWith("todo ")) {
                     String description = input.substring(5);
                     Task task = new Todo(description);
-                    momo.tasks.addTask(task);
-                    printPrettyMessage(momo.createAddTaskMessage(task));
+                    tasks.addTask(task);
+                    ui.printPrettyMessage(ui.createAddTaskMessage(task, tasks));
                 } else if (input.equals("deadline")) {
                     String errorDetail = "The description of the deadline is empty!";
                     String errorFix = "Fix: Try \"deadline <description> /by <date/time>\" instead!";
@@ -115,8 +78,8 @@ public class Momo {
                     String[] parsedInput = input.substring(9).split(" /by ");
                     try {
                         Task task = new Deadline(parsedInput[0], parsedInput[1]);
-                        momo.tasks.addTask(task);
-                        printPrettyMessage(momo.createAddTaskMessage(task));
+                        tasks.addTask(task);
+                        ui.printPrettyMessage(ui.createAddTaskMessage(task, tasks));
                     } catch (ArrayIndexOutOfBoundsException e) {
                         String errorDetail = "The deadline is missing \"/by\"!";
                         String errorFix = "Fix: Try \"deadline <description> /by <date/time>\" instead!";
@@ -131,8 +94,8 @@ public class Momo {
                     try {
                         String[] parsedStartEndTime = parsedInput[1].split(" /to ");
                         Task task = new Event(parsedInput[0], parsedStartEndTime[0], parsedStartEndTime[1]);
-                        momo.tasks.addTask(task);
-                        printPrettyMessage(momo.createAddTaskMessage(task));
+                        tasks.addTask(task);
+                        ui.printPrettyMessage(ui.createAddTaskMessage(task, tasks));
                     } catch (ArrayIndexOutOfBoundsException e) {
                         String errorDetail = "The event is missing \"/from\" or \"/to\"!";
                         String errorFix = "Fix: Try \"event <description> /from <date/time> " +
@@ -145,12 +108,15 @@ public class Momo {
                     throw new MomoException(errorDetail + "\n" + errorFix);
                 }
             } catch (MomoException e) {
-                printPrettyMessage(e.getMessage());
+                ui.printPrettyMessage(e.getMessage());
             }
-            input = scanner.nextLine().trim();
         }
-        scanner.close();
+        ui.close();
+        ui.showBye();
+    }
 
-        printPrettyMessage(MESSAGE_BYE);
+    public static void main(String[] args) {
+        Momo momo = new Momo();
+        momo.run();
     }
 }
