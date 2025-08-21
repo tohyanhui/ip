@@ -96,6 +96,11 @@
 	____________________________________________________________
 
 	____________________________________________________________
+	 Nani?!? The task number provided is invalid!
+	 Fix: Retry "mark <task number>" with a valid task number!
+	____________________________________________________________
+
+	____________________________________________________________
 	 Nani?!? The task number provided is not an integer!
 	 Fix: Try "mark <integer>" instead!
 	____________________________________________________________
@@ -127,6 +132,11 @@
 	____________________________________________________________
 	 Nani?!? The task number to unmark is not provided!
 	 Fix: Try "unmark <task number>" instead!
+	____________________________________________________________
+
+	____________________________________________________________
+	 Nani?!? The task number provided is invalid!
+	 Fix: Retry "unmark <task number>" with a valid task number!
 	____________________________________________________________
 
 	____________________________________________________________
@@ -166,6 +176,11 @@
 	____________________________________________________________
 
 	____________________________________________________________
+	 Nani?!? The task number provided is not an integer!
+	 Fix: Try "delete <integer>" instead!
+	____________________________________________________________
+
+	____________________________________________________________
 	 Noted. I've removed this task:
 	   [D][X] return book (by: Sunday)
 	 Now you have 3 tasks in the list.
@@ -176,6 +191,11 @@
 	 1.[T][ ] read book
 	 2.[E][ ] project meeting (from: Mon 2pm to: 4pm)
 	 3.[T][ ] borrow book
+	____________________________________________________________
+
+	____________________________________________________________
+	 Nani?!? The task number provided is invalid!
+	 Fix: Retry "delete <task number>" with a valid task number!
 	____________________________________________________________
 
 	____________________________________________________________

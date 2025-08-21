@@ -49,14 +49,14 @@ public class Ui {
     public void close() {
         scanner.close();
     }
-
-    public String createAddTaskMessage(Task task, TaskList tasks) {
-        return "Got it. I've added this task:\n" +  space(space(task.toString()))
-                + "\nNow you have " + tasks.size() + " tasks in the list.";
+    
+    public void printAddTaskMessage(Task task, TaskList tasks) {
+        printPrettyMessage("Got it. I've added this task:\n" +  space(space(task.toString()))
+                + "\nNow you have " + tasks.size() + " tasks in the list.");
     }
 
-    public String createDeleteTaskMessage(Task task, TaskList tasks) {
-        return "Noted. I've removed this task:\n" +  space(space(task.toString()))
-                + "\nNow you have " + tasks.size() + " tasks in the list.";
+    public void printDeleteTaskMessage(Task task, TaskList tasks) {
+        printPrettyMessage("Noted. I've removed this task:\n" +  space(space(task.toString()))
+                + "\nNow you have " + tasks.size() + " tasks in the list.");
     }
 }
