@@ -37,19 +37,19 @@
 	____________________________________________________________
 
 	____________________________________________________________
-	 Nani?!? The event is missing "/from" or "/to"!
+	 Nani?!? The event is missing "/from"!
 	 Fix: Try "event <description> /from <date/time> /to
 	 <date/time>" instead!
 	____________________________________________________________
 
 	____________________________________________________________
-	 Nani?!? The event is missing "/from" or "/to"!
+	 Nani?!? The event is missing "/to"!
 	 Fix: Try "event <description> /from <date/time> /to
 	 <date/time>" instead!
 	____________________________________________________________
 
 	____________________________________________________________
-	 Nani?!? The event is missing "/from" or "/to"!
+	 Nani?!? The event is missing "/from"!
 	 Fix: Try "event <description> /from <date/time> /to
 	 <date/time>" instead!
 	____________________________________________________________
