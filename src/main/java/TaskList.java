@@ -26,4 +26,13 @@ public class TaskList {
     public int size() {
         return tasks.size();
     }
+    
+    public String convertToSaveFormat() {
+        return String.join(System.lineSeparator(), 
+                tasks.stream().map(Task::convertToSaveFormat).toList());
+    }
+
+    public void clear() {
+        tasks.clear();
+    }
 }
