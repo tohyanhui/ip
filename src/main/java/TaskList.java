@@ -31,4 +31,8 @@ public class TaskList {
         return String.join(System.lineSeparator(), 
                 tasks.stream().map(Task::convertToSaveFormat).toList());
     }
+
+    public void clear() {
+        tasks.clear();
+    }
 }

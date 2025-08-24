@@ -7,6 +7,12 @@ public class Event extends Task {
         this.from = from;
         this.to = to;
     }
+    
+    public Event(String description, String from, String to, boolean isDone) {
+        super(description, isDone);
+        this.from = from;
+        this.to = to;
+    }
 
     @Override
     public String toString() {

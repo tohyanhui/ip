@@ -4,12 +4,13 @@ public class Momo {
     private final Ui ui = new Ui();
     
     public void run() {
+        storage.load(tasks);
         ui.showWelcome();
         boolean isExit = false;
         while (!isExit) {
             try {
                 String trimmedInput = ui.readCommand();
-                Command command = Parser.parse(trimmedInput);
+                Command command = Parser.parseToCommand(trimmedInput);
                 command.execute(tasks, ui, storage);
                 isExit = command.isExit();
             } catch (MomoException e) {
