@@ -3,7 +3,7 @@ import java.util.stream.IntStream;
 
 public class ListCommand implements Command {
     @Override
-    public void execute(TaskList tasks, Ui ui) {
+    public void execute(TaskList tasks, Ui ui, Storage storage) {
         String listMessage = IntStream.range(0, tasks.size())
                 .mapToObj(x -> String.format("%d.%s", x + 1, tasks.getTask(x).toString()))
                 .collect(Collectors.joining("\n"));

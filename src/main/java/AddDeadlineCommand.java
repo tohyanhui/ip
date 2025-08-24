@@ -8,9 +8,10 @@ public class AddDeadlineCommand implements Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui) {
+    public void execute(TaskList tasks, Ui ui, Storage storage) {
         Task task = new Deadline(description, by);
         tasks.addTask(task);
+        storage.save(tasks);
         ui.printAddTaskMessage(task, tasks);
     }
     
