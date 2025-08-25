@@ -1,3 +1,11 @@
+package momo.command;
+
+import momo.storage.Storage;
+import momo.task.Deadline;
+import momo.task.Task;
+import momo.task.TaskList;
+import momo.ui.Ui;
+
 import java.time.LocalDateTime;
 
 public class AddDeadlineCommand implements Command {

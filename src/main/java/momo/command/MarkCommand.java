@@ -1,3 +1,10 @@
+package momo.command;
+
+import momo.exception.MomoException;
+import momo.storage.Storage;
+import momo.task.TaskList;
+import momo.ui.Ui;
+
 public class MarkCommand implements Command {
     private final int index;
 

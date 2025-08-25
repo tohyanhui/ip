@@ -1,3 +1,12 @@
+package momo;
+
+import momo.command.Command;
+import momo.exception.MomoException;
+import momo.parser.Parser;
+import momo.storage.Storage;
+import momo.task.TaskList;
+import momo.ui.Ui;
+
 public class Momo {
     private final Storage storage;
     private final TaskList tasks;
