@@ -1,9 +1,11 @@
+import java.time.LocalDateTime;
+
 public class AddEventCommand implements Command {
     private final String description;
-    private final String from;
-    private final String to;
+    private final LocalDateTime from;
+    private final LocalDateTime to;
     
-    public AddEventCommand(String description, String from, String to) {
+    public AddEventCommand(String description, LocalDateTime from, LocalDateTime to) {
         this.description = description;
         this.from = from;
         this.to = to;

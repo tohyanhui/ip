@@ -66,28 +66,45 @@
 	____________________________________________________________
 
 	____________________________________________________________
+	 Nani?!? The format of date and time entered is invalid!
+	 Fix: Try "deadline <description> /by <yyyy-MM-dd HHmm>"
+	 instead!
+	 Example: deadline return book /by 2025-04-07 1805
+	____________________________________________________________
+
+	____________________________________________________________
 	 Got it. I've added this task:
-	   [D][ ] return book (by: Sunday)
+	   [D][ ] return book (by: Dec 10 2025, 12:00pm)
 	 Now you have 2 tasks in the list.
 	____________________________________________________________
 
 	____________________________________________________________
 	 Here are the tasks in your list:
 	 1.[T][ ] read book
-	 2.[D][ ] return book (by: Sunday)
+	 2.[D][ ] return book (by: Dec 10 2025, 12:00pm)
+	____________________________________________________________
+
+	____________________________________________________________
+	 Nani?!? The format of date and time entered is invalid!
+	 Fix: Try "event <description> /from <yyyy-MM-dd HHmm>
+	 /to <yyyy-MM-dd HHmm>" instead!
+	 Example: event project meeting /from 2025-04-07 1230
+	 /to 2025-04-07 1330
 	____________________________________________________________
 
 	____________________________________________________________
 	 Got it. I've added this task:
-	   [E][ ] project meeting (from: Mon 2pm to: 4pm)
+	   [E][ ] project meeting (from: Dec 20 2025, 12:00pm
+	   to: Dec 20 2025, 2:00pm)
 	 Now you have 3 tasks in the list.
 	____________________________________________________________
 
 	____________________________________________________________
 	 Here are the tasks in your list:
 	 1.[T][ ] read book
-	 2.[D][ ] return book (by: Sunday)
-	 3.[E][ ] project meeting (from: Mon 2pm to: 4pm)
+	 2.[D][ ] return book (by: Dec 10 2025, 12:00pm)
+	 3.[E][ ] project meeting (from: Dec 20 2025, 12:00pm
+	 to: Dec 20 2025, 2:00pm)
 	____________________________________________________________
 
 	____________________________________________________________
@@ -107,26 +124,29 @@
 
 	____________________________________________________________
 	 Nice! I've marked this task as done:
-	   [D][X] return book (by: Sunday)
+	   [D][X] return book (by: Dec 10 2025, 12:00pm)
 	____________________________________________________________
 
 	____________________________________________________________
 	 Here are the tasks in your list:
 	 1.[T][ ] read book
-	 2.[D][X] return book (by: Sunday)
-	 3.[E][ ] project meeting (from: Mon 2pm to: 4pm)
+	 2.[D][X] return book (by: Dec 10 2025, 12:00pm)
+	 3.[E][ ] project meeting (from: Dec 20 2025, 12:00pm
+	 to: Dec 20 2025, 2:00pm)
 	____________________________________________________________
 
 	____________________________________________________________
 	 Nice! I've marked this task as done:
-	   [E][X] project meeting (from: Mon 2pm to: 4pm)
+	   [E][X] project meeting (from: Dec 20 2025, 12:00pm
+	 to: Dec 20 2025, 2:00pm)
 	____________________________________________________________
 
 	____________________________________________________________
 	 Here are the tasks in your list:
 	 1.[T][ ] read book
-	 2.[D][X] return book (by: Sunday)
-	 3.[E][X] project meeting (from: Mon 2pm to: 4pm)
+	 2.[D][X] return book (by: Dec 10 2025, 12:00pm)
+	 3.[E][X] project meeting (from: Dec 20 2025, 12:00pm
+	 to: Dec 20 2025, 2:00pm)
 	____________________________________________________________
 
 	____________________________________________________________
@@ -146,14 +166,16 @@
 
 	____________________________________________________________
 	 OK, I've marked this task as not done yet:
-	   [E][ ] project meeting (from: Mon 2pm to: 4pm)
+	   [E][ ] project meeting (from: Dec 20 2025, 12:00pm
+	 to: Dec 20 2025, 2:00pm)
 	____________________________________________________________
 
 	____________________________________________________________
 	 Here are the tasks in your list:
 	 1.[T][ ] read book
-	 2.[D][X] return book (by: Sunday)
-	 3.[E][ ] project meeting (from: Mon 2pm to: 4pm)
+	 2.[D][X] return book (by: Dec 10 2025, 12:00pm)
+	 3.[E][ ] project meeting (from: Dec 20 2025, 12:00pm
+	 to: Dec 20 2025, 2:00pm)
 	____________________________________________________________
 
 	____________________________________________________________
@@ -165,8 +187,9 @@
 	____________________________________________________________
 	 Here are the tasks in your list:
 	 1.[T][ ] read book
-	 2.[D][X] return book (by: Sunday)
-	 3.[E][ ] project meeting (from: Mon 2pm to: 4pm)
+	 2.[D][X] return book (by: Dec 10 2025, 12:00pm)
+	 3.[E][ ] project meeting (from: Dec 20 2025, 12:00pm
+	 to: Dec 20 2025, 2:00pm)
 	 4.[T][ ] borrow book
 	____________________________________________________________
 
@@ -182,14 +205,15 @@
 
 	____________________________________________________________
 	 Noted. I've removed this task:
-	   [D][X] return book (by: Sunday)
+	   [D][X] return book (by: Dec 10 2025, 12:00pm)
 	 Now you have 3 tasks in the list.
 	____________________________________________________________
 
 	____________________________________________________________
 	 Here are the tasks in your list:
 	 1.[T][ ] read book
-	 2.[E][ ] project meeting (from: Mon 2pm to: 4pm)
+	 2.[E][ ] project meeting (from: Dec 20 2025, 12:00pm
+	 to: Dec 20 2025, 2:00pm)
 	 3.[T][ ] borrow book
 	____________________________________________________________
 

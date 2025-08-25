@@ -9,8 +9,10 @@ event project meeting /to 4pm
 todo read book
 list
 deadline return book /by Sunday
+deadline return book /by 2025-12-10 1200
 list
 event project meeting /from Mon 2pm /to 4pm
+event project meeting /from 2025-12-20 1200 /to 2025-12-20 1400
 list
 mark
 mark 100

@@ -1,4 +1,12 @@
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+
 public class Parser {
+    private static LocalDateTime parseToLocalDateTime(String localDateTime) {
+        return LocalDateTime.parse(localDateTime, DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm"));
+    }
+    
     public static Command parseToCommand(String trimmedInput) throws MomoException {
         String[] components = trimmedInput.split(" ", 2);
         String command = components[0];
@@ -27,7 +35,16 @@ public class Parser {
                 String errorFix = "Fix: Try \"deadline <description> /by <date/time>\" instead!";
                 throw new MomoException(errorDetail + "\n" + errorFix);
             }
-            return new AddDeadlineCommand(parsedDeadline[0], parsedDeadline[1]);
+            try {
+                String description = parsedDeadline[0];
+                LocalDateTime by = parseToLocalDateTime(parsedDeadline[1]);
+                return new AddDeadlineCommand(description, by);
+            } catch (DateTimeParseException e) {
+                String errorDetail = "The format of date and time entered is invalid!";
+                String errorFix = "Fix: Try \"deadline <description> /by <yyyy-MM-dd HHmm>\"\ninstead!";
+                String example = "Example: deadline return book /by 2025-04-07 1805";
+                throw new MomoException(errorDetail + "\n" + errorFix + "\n" + example);
+            }
         case "event":
             if (components.length < 2) {
                 String errorDetail = "The description of the event is empty!";
@@ -37,18 +54,27 @@ public class Parser {
             String[] parsedEvent = components[1].split(" /from ", 2);
             if (parsedEvent.length < 2) {
                 String errorDetail = "The event is missing \"/from\"!";
-                String errorFix = "Fix: Try \"event <description> /from <date/time> " +
-                        "/to\n<date/time>\" instead!";
+                String errorFix = "Fix: Try \"event <description> /from <date/time> /to\n<date/time>\" instead!";
                 throw new MomoException(errorDetail + "\n" + errorFix);
             }
             String[] parsedStartEndTime = parsedEvent[1].split(" /to ", 2);
             if (parsedStartEndTime.length < 2) {
                 String errorDetail = "The event is missing \"/to\"!";
-                String errorFix = "Fix: Try \"event <description> /from <date/time> " +
-                        "/to\n<date/time>\" instead!";
+                String errorFix = "Fix: Try \"event <description> /from <date/time> /to\n<date/time>\" instead!";
                 throw new MomoException(errorDetail + "\n" + errorFix);
             }
-            return new AddEventCommand(parsedEvent[0], parsedStartEndTime[0], parsedStartEndTime[1]);
+            try {
+                String description = parsedEvent[0];
+                LocalDateTime from = parseToLocalDateTime(parsedStartEndTime[0]);
+                LocalDateTime to = parseToLocalDateTime(parsedStartEndTime[1]);
+                return new AddEventCommand(description, from, to);
+            } catch (DateTimeParseException e) {
+                String errorDetail = "The format of date and time entered is invalid!";
+                String errorFix = "Fix: Try \"event <description> /from <yyyy-MM-dd HHmm>" 
+                        + "\n/to <yyyy-MM-dd HHmm>\" instead!";
+                String example = "Example: event project meeting /from 2025-04-07 1230\n/to 2025-04-07 1330";
+                throw new MomoException(errorDetail + "\n" + errorFix + "\n" + example);
+            }
         case "delete":
             if (components.length < 2) {
                 String errorDetail = "The task number to delete is not provided!";
@@ -109,11 +135,11 @@ public class Parser {
             return new Todo(description, isDone);
         case "D":
             String by = components[3];
-            return new Deadline(description, by, isDone);
+            return new Deadline(description, parseToLocalDateTime(by), isDone);
         case "E":
             String from = components[3];
             String to = components[4];
-            return new Event(description, from, to, isDone);
+            return new Event(description, parseToLocalDateTime(from), parseToLocalDateTime(to), isDone);
         default:
             throw new Exception("Invalid task type");
         }
