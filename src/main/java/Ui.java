@@ -8,6 +8,8 @@ public class Ui {
             + "| |\\/| |/ _ \\| '_ ` _ \\ / _ \\\n"
             + "| |  | | (_) | | | | | | (_) |\n"
             + "|_|  |_|\\___/|_| |_| |_|\\___/\n";
+    private static final String MESSAGE_INITIALISING = "Initialising Momo...";
+    private static final String MESSAGE_INITIALISED = "Momo initialised!";
     private static final String MESSAGE_WELCOME = "Hello I'm\n" + LOGO + "\n" + "What can I do for you?";
     private static final String MESSAGE_BYE = "Bye. Hope to see you again soon!";
     private final Scanner scanner = new Scanner(System.in);
@@ -41,7 +43,19 @@ public class Ui {
     public void showWelcome() {
         printPrettyMessage(MESSAGE_WELCOME);
     }
-    
+
+    public void showInitialising() {
+        System.out.println(MESSAGE_INITIALISING);
+    }
+
+    public void showInitialised() {
+        System.out.println(MESSAGE_INITIALISED);
+    }
+
+    public void showLoadingError() {
+        System.out.println("Error loading data from hard disk...\nDefaulting to fresh state...");
+    }
+
     public String readCommand() {
         return scanner.nextLine().trim();
     }

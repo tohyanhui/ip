@@ -1,10 +1,23 @@
 public class Momo {
-    private final Storage storage = new Storage();
-    private final TaskList tasks = new TaskList();
-    private final Ui ui = new Ui();
+    private final Storage storage;
+    private final TaskList tasks;
+    private final Ui ui;
+    
+    public Momo() {
+        storage = new Storage();
+        tasks = new TaskList();
+        ui = new Ui();
+        ui.showInitialising();
+        try {
+            storage.load(tasks);
+        } catch (MomoException e) {
+            ui.showLoadingError();
+        } finally {
+            ui.showInitialised();
+        }
+    }
     
     public void run() {
-        storage.load(tasks);
         ui.showWelcome();
         boolean isExit = false;
         while (!isExit) {

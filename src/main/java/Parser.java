@@ -124,24 +124,30 @@ public class Parser {
         }
     }
     
-    public static Task parseToTask(String line) throws Exception {
-        String[] components = line.split(" \\| ");
-        String taskType = components[0];
-        boolean isDone = components[1].equals("1");
-        String description = components[2];
+    public static Task parseToTask(String line) throws MomoException {
+        try {
+            String[] components = line.split(" \\| ");
+            String taskType = components[0];
+            boolean isDone = components[1].equals("1");
+            String description = components[2];
 
-        switch (taskType) {
-        case "T":
-            return new Todo(description, isDone);
-        case "D":
-            String by = components[3];
-            return new Deadline(description, parseToLocalDateTime(by), isDone);
-        case "E":
-            String from = components[3];
-            String to = components[4];
-            return new Event(description, parseToLocalDateTime(from), parseToLocalDateTime(to), isDone);
-        default:
-            throw new Exception("Invalid task type");
+            switch (taskType) {
+            case "T":
+                return new Todo(description, isDone);
+            case "D":
+                String by = components[3];
+                return new Deadline(description, parseToLocalDateTime(by), isDone);
+            case "E":
+                String from = components[3];
+                String to = components[4];
+                return new Event(description, parseToLocalDateTime(from), parseToLocalDateTime(to), isDone);
+            default:
+                throw new MomoException("Invalid task type found!");
+            }
+        } catch (ArrayIndexOutOfBoundsException e) {
+            throw new MomoException("Missing data from tasks!");
+        } catch (DateTimeParseException e) {
+            throw new MomoException("Format of date and time is invalid!");
         }
     }
 }

@@ -19,21 +19,22 @@ public class Storage {
         }
     }
     
-    public void load(TaskList tasks) {
+    public void load(TaskList tasks) throws MomoException {
         Path filePath = Paths.get(DIRECTORY).resolve(FILE_NAME);
         if (!Files.exists(filePath)) {
             return;
         }
-        
         try {
             List<String> lines = Files.readAllLines(filePath);
             for (String line : lines) {
                 Task task = Parser.parseToTask(line);
                 tasks.addTask(task);
             }
-        } catch (Exception e) {
+        } catch (IOException e) {
+            throw new MomoException("Unable to read saved data in hard disk");
+        } catch (MomoException e) {
             tasks.clear();
-            System.out.println("Error loading data from hard disk: " + e.getMessage() + "\nDefaulting to fresh state.");
+            throw e;
         }
     }
 }
