@@ -19,6 +19,7 @@ public class Momo {
         ui.showInitialising();
         try {
             storage.load(tasks);
+            ui.showRetrievingData();
         } catch (MomoException e) {
             ui.showLoadingError();
         } finally {

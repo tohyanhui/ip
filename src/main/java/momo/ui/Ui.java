@@ -57,6 +57,10 @@ public class Ui {
         System.out.println(MESSAGE_INITIALISED);
     }
 
+    public void showRetrievingData() {
+        System.out.println("Retrieving saved data from hard disk if any...");
+    }
+
     public void showLoadingError() {
         System.out.println("Error loading data from hard disk...\nDefaulting to fresh state...");
     }
