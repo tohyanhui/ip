@@ -22,7 +22,7 @@ public class AddDeadlineCommand implements Command {
         Task task = new Deadline(description, by);
         tasks.addTask(task);
         storage.save(tasks);
-        ui.printAddTaskMessage(task, tasks);
+        ui.showAddTaskMessage(task, tasks);
     }
     
     @Override

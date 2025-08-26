@@ -24,7 +24,7 @@ public class AddEventCommand implements Command {
         Task task = new Event(description, from, to);
         tasks.addTask(task);
         storage.save(tasks);
-        ui.printAddTaskMessage(task, tasks);
+        ui.showAddTaskMessage(task, tasks);
     }
 
     @Override

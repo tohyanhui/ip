@@ -18,7 +18,7 @@ public class AddTodoCommand implements Command {
         Task task = new Todo(description);
         tasks.addTask(task);
         storage.save(tasks);
-        ui.printAddTaskMessage(task, tasks);
+        ui.showAddTaskMessage(task, tasks);
     }
     
     @Override

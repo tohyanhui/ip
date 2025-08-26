@@ -34,19 +34,20 @@ public class Ui {
         System.out.println(indent(HORIZONTAL_LINE));
     }
 
-    public void printPrettyMessage(String message) {
+    public void showPrettyMessage(String message) {
         showLine();
         System.out.println(indent(space(message)));
         showLine();
         System.out.println();
     }
 
+    // show bye
     public void showBye() {
-        printPrettyMessage(MESSAGE_BYE);
+        showPrettyMessage(MESSAGE_BYE);
     }
     
     public void showWelcome() {
-        printPrettyMessage(MESSAGE_WELCOME);
+        showPrettyMessage(MESSAGE_WELCOME);
     }
 
     public void showInitialising() {
@@ -73,13 +74,13 @@ public class Ui {
         scanner.close();
     }
     
-    public void printAddTaskMessage(Task task, TaskList tasks) {
-        printPrettyMessage("Got it. I've added this task:\n" +  space(space(task.toString()))
+    public void showAddTaskMessage(Task task, TaskList tasks) {
+        showPrettyMessage("Got it. I've added this task:\n" +  space(space(task.toString()))
                 + "\nNow you have " + tasks.size() + " tasks in the list.");
     }
 
-    public void printDeleteTaskMessage(Task task, TaskList tasks) {
-        printPrettyMessage("Noted. I've removed this task:\n" +  space(space(task.toString()))
+    public void showDeleteTaskMessage(Task task, TaskList tasks) {
+        showPrettyMessage("Noted. I've removed this task:\n" +  space(space(task.toString()))
                 + "\nNow you have " + tasks.size() + " tasks in the list.");
     }
 }

@@ -21,7 +21,7 @@ public class MarkCommand implements Command {
         }
         tasks.markTask(index);
         storage.save(tasks);
-        ui.printPrettyMessage("Nice! I've marked this task as done:\n  " + tasks.getTask(index).toString());
+        ui.showPrettyMessage("Nice! I've marked this task as done:\n  " + tasks.getTask(index).toString());
     }
 
     @Override
