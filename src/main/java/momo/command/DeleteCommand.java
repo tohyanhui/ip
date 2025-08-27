@@ -6,13 +6,31 @@ import momo.task.Task;
 import momo.task.TaskList;
 import momo.ui.Ui;
 
+/**
+ * Represents a command that deletes a task from the task list.
+ */
 public class DeleteCommand implements Command {
     private final int index;
 
+    /**
+     * Creates a new {@code DeleteCommand}.
+     *
+     * @param index the index of the task to be deleted.
+     */
     public DeleteCommand(int index) {
         this.index = index;
     }
 
+    /**
+     * Deletes the task at the specified index from the task list.
+     * Also saves the updated task list to storage and
+     * displays a confirmation message to the user.
+     *
+     * @param tasks the task list from which the task is deleted.
+     * @param ui the user interface that displays messages to the user.
+     * @param storage the storage handler that saves the updated task list.
+     * @throws MomoException if the specified index is invalid.
+     */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws MomoException {
         if (index < 0 || index >= tasks.size()) {
@@ -25,6 +43,11 @@ public class DeleteCommand implements Command {
         ui.printDeleteTaskMessage(deletedTask, tasks);
     }
 
+    /**
+     * Returns whether this command will exit the program.
+     *
+     * @return {@code false}, as deleting a task does not exit the program.
+     */
     @Override
     public boolean isExit() {
         return false;

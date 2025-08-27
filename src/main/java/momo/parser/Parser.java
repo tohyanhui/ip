@@ -11,11 +11,30 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Parses user input and saved task strings into corresponding {@link Command} objects
+ * or {@link Task} objects for the Momo application.
+ */
 public class Parser {
+
+    /**
+     * Converts a string representation of date and time into {@link LocalDateTime}.
+     *
+     * @param localDateTime the date and time string in "yyyy-MM-dd HHmm" format.
+     * @return the parsed {@link LocalDateTime}.
+     */
     private static LocalDateTime parseToLocalDateTime(String localDateTime) {
         return LocalDateTime.parse(localDateTime, DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm"));
     }
-    
+
+    /**
+     * Converts a trimmed user input string into the corresponding {@link Command}.
+     * Throws {@link MomoException} for invalid input or format errors.
+     *
+     * @param trimmedInput the trimmed user input string.
+     * @return the {@link Command} corresponding to the user input.
+     * @throws MomoException if the input is invalid, incomplete, or formatted incorrectly.
+     */
     public static Command parseToCommand(String trimmedInput) throws MomoException {
         String[] components = trimmedInput.split(" ", 2);
         String command = components[0];
@@ -132,7 +151,14 @@ public class Parser {
             throw new MomoException(errorDetail + "\n" + errorFix);
         }
     }
-    
+
+    /**
+     * Converts a saved task string into a {@link Task} object.
+     *
+     * @param line the saved task string in the format used by storage.
+     * @return the {@link Task} object represented by the line.
+     * @throws MomoException if the task string is malformed or contains invalid data.
+     */
     public static Task parseToTask(String line) throws MomoException {
         try {
             String[] components = line.split(" \\| ");

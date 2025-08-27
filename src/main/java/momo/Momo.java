@@ -7,11 +7,25 @@ import momo.storage.Storage;
 import momo.task.TaskList;
 import momo.ui.Ui;
 
+/**
+ * Main class for the Momo application.
+ * Handles the initialization of components, loading of saved tasks,
+ * and the main input-processing loop.
+ */
 public class Momo {
+    /** Handles saving and loading tasks to/from the local file system. */
     private final Storage storage;
-    private final TaskList tasks;
-    private final Ui ui;
     
+    /** Stores the current list of tasks. */
+    private final TaskList tasks;
+    
+    /** Handles all user interactions and displays messages. */
+    private final Ui ui;
+
+    /**
+     * Initializes the Momo application.
+     * Loads tasks from storage if available and displays initialization messages.
+     */
     public Momo() {
         storage = new Storage();
         tasks = new TaskList();
@@ -27,6 +41,11 @@ public class Momo {
         }
     }
     
+    /**
+     * Runs the main loop of the application.
+     * Continuously reads user commands, parses them, and executes them
+     * until an exit command is received.
+     */
     public void run() {
         ui.showWelcome();
         boolean isExit = false;
@@ -43,6 +62,11 @@ public class Momo {
         ui.close();
     }
 
+    /**
+     * Entry point of the Momo application.
+     *
+     * @param args command-line arguments (not used)
+     */
     public static void main(String[] args) {
         Momo momo = new Momo();
         momo.run();

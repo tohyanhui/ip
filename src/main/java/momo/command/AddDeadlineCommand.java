@@ -8,15 +8,34 @@ import momo.ui.Ui;
 
 import java.time.LocalDateTime;
 
+/**
+ * Represents a command that adds a {@link Deadline} task
+ * to the task list.
+ */
 public class AddDeadlineCommand implements Command {
     private final String description;
     private final LocalDateTime by;
 
+    /**
+     * Creates a new {@code AddDeadlineCommand}.
+     *
+     * @param description the description of the deadline task.
+     * @param by the due date and time of the deadline task.
+     */
     public AddDeadlineCommand(String description, LocalDateTime by) {
         this.description = description;
         this.by = by;
     }
-
+    
+    /**
+     * Adds a new {@link Deadline} task to the task list.
+     * Also saves the updated task list to storage and
+     * displays a confirmation message to the user.
+     *
+     * @param tasks the task list to which the deadline is added.
+     * @param ui the user interface that displays messages to the user.
+     * @param storage the storage handler that saves the updated task list.
+     */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         Task task = new Deadline(description, by);
@@ -24,7 +43,12 @@ public class AddDeadlineCommand implements Command {
         storage.save(tasks);
         ui.printAddTaskMessage(task, tasks);
     }
-    
+
+    /**
+     * Returns whether this command will exit the program.
+     *
+     * @return {@code false}, as adding a deadline does not exit the program.
+     */
     @Override
     public boolean isExit() {
         return false;
