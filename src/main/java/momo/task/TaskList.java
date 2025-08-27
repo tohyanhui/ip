@@ -1,6 +1,7 @@
 package momo.task;
 
 import java.util.ArrayList;
+import java.util.stream.Stream;
 
 public class TaskList {
     private final ArrayList<Task> tasks = new ArrayList<>();
@@ -33,6 +34,11 @@ public class TaskList {
         return String.join(System.lineSeparator(), 
                 tasks.stream().map(Task::convertToSaveFormat).toList());
     }
+
+    public Stream<Task> stream() {
+        return tasks.stream();
+    }
+
 
     public void clear() {
         tasks.clear();
