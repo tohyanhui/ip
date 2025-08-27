@@ -59,6 +59,13 @@ public class Parser {
                 throw new MomoException(errorDetail + "\n" + errorFix);
             }
             return new AddTodoCommand(components[1]);
+        case "find":
+            if (components.length < 2) {
+                String errorDetail = "The keyword to find is missing!";
+                String errorFix = "Fix: Try \"find <keyword>\" instead!";
+                throw new MomoException(errorDetail + "\n" + errorFix);
+            }
+            return new FindCommand((components[1]));
         case "deadline":
             if (components.length < 2) {
                 String errorDetail = "The description of the deadline is empty!";

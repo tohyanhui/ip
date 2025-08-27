@@ -1,6 +1,7 @@
 package momo.task;
 
 import java.util.ArrayList;
+import java.util.stream.Stream;
 
 /**
  * Represents a list of tasks and provides operations to manage them.
@@ -72,6 +73,10 @@ public class TaskList {
     public String convertToSaveFormat() {
         return String.join(System.lineSeparator(), 
                 tasks.stream().map(Task::convertToSaveFormat).toList());
+    }
+    
+    public Stream<Task> stream() {
+        return tasks.stream();
     }
 
     /**
