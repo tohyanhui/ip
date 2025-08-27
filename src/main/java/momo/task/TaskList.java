@@ -74,7 +74,12 @@ public class TaskList {
         return String.join(System.lineSeparator(), 
                 tasks.stream().map(Task::convertToSaveFormat).toList());
     }
-    
+
+    /**
+     * Returns a stream of tasks in this list.
+     *
+     * @return a Stream of Task objects.
+     */
     public Stream<Task> stream() {
         return tasks.stream();
     }

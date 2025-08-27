@@ -6,18 +6,16 @@ import momo.command.AddTodoCommand;
 import momo.command.Command;
 import momo.command.DeleteCommand;
 import momo.command.ExitCommand;
+import momo.command.FindCommand;
 import momo.command.ListCommand;
 import momo.command.MarkCommand;
 import momo.command.UnmarkCommand;
-
 import momo.exception.MomoException;
-
 import momo.task.Deadline;
 import momo.task.Event;
 import momo.task.Task;
 import momo.task.Todo;
 import org.junit.jupiter.api.Test;
-
 import java.time.LocalDateTime;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -49,6 +47,18 @@ public class ParserTest {
     public void parseToCommand_todoMissingDescription_exceptionThrown() {
         MomoException e = assertThrows(MomoException.class, () -> Parser.parseToCommand("todo"));
         assertTrue(e.getMessage().contains("The description of the todo is empty"));
+    }
+
+    @Test
+    public void parseToCommand_find_success() throws MomoException {
+        Command command = Parser.parseToCommand("find book");
+        assertInstanceOf(FindCommand.class, command);
+    }
+
+    @Test
+    public void parseToCommand_findMissingKeyword_exceptionThrown() {
+        MomoException e = assertThrows(MomoException.class, () -> Parser.parseToCommand("find"));
+        assertTrue(e.getMessage().contains("The keyword to find is missing"));
     }
 
     @Test

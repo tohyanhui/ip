@@ -6,6 +6,7 @@ import momo.command.AddTodoCommand;
 import momo.command.Command;
 import momo.command.DeleteCommand;
 import momo.command.ExitCommand;
+import momo.command.FindCommand;
 import momo.command.ListCommand;
 import momo.command.MarkCommand;
 import momo.command.UnmarkCommand;

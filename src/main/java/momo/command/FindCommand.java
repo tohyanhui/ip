@@ -27,7 +27,7 @@ public class FindCommand implements Command {
                 .mapToObj(x -> String.format("%d.%s", x + 1, foundTasks.get(x).toString()))
                 .collect(Collectors.joining("\n"));
     
-        ui.printPrettyMessage("Here are the matching tasks in your list:\n" + foundTasksMessage);
+        ui.showPrettyMessage("Here are the matching tasks in your list:\n" + foundTasksMessage);
     }
 
     @Override
