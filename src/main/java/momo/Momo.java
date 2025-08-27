@@ -56,7 +56,7 @@ public class Momo {
                 command.execute(tasks, ui, storage);
                 isExit = command.isExit();
             } catch (MomoException e) {
-                ui.printPrettyMessage(e.getMessage());
+                ui.showPrettyMessage(e.getMessage());
             }
         }
         ui.close();

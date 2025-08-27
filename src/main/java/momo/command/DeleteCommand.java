@@ -40,7 +40,7 @@ public class DeleteCommand implements Command {
         }
         Task deletedTask = tasks.deleteTask(index);
         storage.save(tasks);
-        ui.printDeleteTaskMessage(deletedTask, tasks);
+        ui.showDeleteTaskMessage(deletedTask, tasks);
     }
 
     /**

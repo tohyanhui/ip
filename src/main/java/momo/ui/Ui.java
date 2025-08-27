@@ -61,13 +61,13 @@ public class Ui {
     public void showLine() {
         System.out.println(indent(HORIZONTAL_LINE));
     }
-
+    
     /**
      * Prints a formatted message with horizontal lines and indentation.
      *
      * @param message the message to display
      */
-    public void printPrettyMessage(String message) {
+    public void showPrettyMessage(String message) {
         showLine();
         System.out.println(indent(space(message)));
         showLine();
@@ -78,14 +78,14 @@ public class Ui {
      * Prints the farewell message when exiting the application.
      */
     public void showBye() {
-        printPrettyMessage(MESSAGE_BYE);
+        showPrettyMessage(MESSAGE_BYE);
     }
 
     /**
      * Prints the welcome message when starting the application.
      */
     public void showWelcome() {
-        printPrettyMessage(MESSAGE_WELCOME);
+        showPrettyMessage(MESSAGE_WELCOME);
     }
 
     /**
@@ -138,8 +138,8 @@ public class Ui {
      * @param task the task that was added
      * @param tasks the current task list
      */
-    public void printAddTaskMessage(Task task, TaskList tasks) {
-        printPrettyMessage("Got it. I've added this task:\n" +  space(space(task.toString()))
+    public void showAddTaskMessage(Task task, TaskList tasks) {
+        showPrettyMessage("Got it. I've added this task:\n" +  space(space(task.toString()))
                 + "\nNow you have " + tasks.size() + " tasks in the list.");
     }
 
@@ -149,8 +149,8 @@ public class Ui {
      * @param task the task that was deleted
      * @param tasks the current task list
      */
-    public void printDeleteTaskMessage(Task task, TaskList tasks) {
-        printPrettyMessage("Noted. I've removed this task:\n" +  space(space(task.toString()))
+    public void showDeleteTaskMessage(Task task, TaskList tasks) {
+        showPrettyMessage("Noted. I've removed this task:\n" +  space(space(task.toString()))
                 + "\nNow you have " + tasks.size() + " tasks in the list.");
     }
 }
