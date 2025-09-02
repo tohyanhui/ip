@@ -1,9 +1,9 @@
 package momo.ui;
 
+import java.util.Scanner;
+
 import momo.task.Task;
 import momo.task.TaskList;
-
-import java.util.Scanner;
 
 /**
  * Handles all user interactions in the Momo application.
@@ -12,7 +12,7 @@ import java.util.Scanner;
 public class Ui {
     /** Horizontal line used as a visual separator in messages. */
     private static final String HORIZONTAL_LINE = "____________________________________________________________";
-    
+
     /** ASCII art logo of Momo displayed at startup. */
     private static final String LOGO = " __  __\n"
             + "|  \\/  |\n"
@@ -20,7 +20,7 @@ public class Ui {
             + "| |\\/| |/ _ \\| '_ ` _ \\ / _ \\\n"
             + "| |  | | (_) | | | | | | (_) |\n"
             + "|_|  |_|\\___/|_| |_| |_|\\___/\n";
-    
+
     /** Message displayed when Momo is initializing. */
     private static final String MESSAGE_INITIALISING = "Initialising Momo...";
 
@@ -32,7 +32,7 @@ public class Ui {
 
     /** Farewell message displayed when exiting the application. */
     private static final String MESSAGE_BYE = "Bye. Hope to see you again soon!";
-    
+
     private final Scanner scanner = new Scanner(System.in);
 
     /**
@@ -61,7 +61,7 @@ public class Ui {
     public void showLine() {
         System.out.println(indent(HORIZONTAL_LINE));
     }
-    
+
     /**
      * Prints a formatted message with horizontal lines and indentation.
      *
@@ -73,7 +73,7 @@ public class Ui {
         showLine();
         System.out.println();
     }
-    
+
     /**
      * Prints the farewell message when exiting the application.
      */
@@ -139,7 +139,7 @@ public class Ui {
      * @param tasks the current task list
      */
     public void showAddTaskMessage(Task task, TaskList tasks) {
-        showPrettyMessage("Got it. I've added this task:\n" +  space(space(task.toString()))
+        showPrettyMessage("Got it. I've added this task:\n" + space(space(task.toString()))
                 + "\nNow you have " + tasks.size() + " tasks in the list.");
     }
 
@@ -150,7 +150,7 @@ public class Ui {
      * @param tasks the current task list
      */
     public void showDeleteTaskMessage(Task task, TaskList tasks) {
-        showPrettyMessage("Noted. I've removed this task:\n" +  space(space(task.toString()))
+        showPrettyMessage("Noted. I've removed this task:\n" + space(space(task.toString()))
                 + "\nNow you have " + tasks.size() + " tasks in the list.");
     }
 }

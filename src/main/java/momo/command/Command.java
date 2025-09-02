@@ -9,9 +9,8 @@ import momo.ui.Ui;
  * Represents a command that can be executed in the application.
  */
 public interface Command {
-    
     /**
-     * Executes this command using the given task list, user interface, 
+     * Executes this command using the given task list, user interface,
      * and storage handler.
      *
      * @param tasks the task list to operate on.

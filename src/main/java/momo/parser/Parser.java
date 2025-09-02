@@ -1,5 +1,9 @@
 package momo.parser;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+
 import momo.command.AddDeadlineCommand;
 import momo.command.AddEventCommand;
 import momo.command.AddTodoCommand;
@@ -15,10 +19,6 @@ import momo.task.Deadline;
 import momo.task.Event;
 import momo.task.Task;
 import momo.task.Todo;
-
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
 
 /**
  * Parses user input and saved task strings into corresponding {@link Command} objects
@@ -114,7 +114,7 @@ public class Parser {
                 return new AddEventCommand(description, from, to);
             } catch (DateTimeParseException e) {
                 String errorDetail = "The format of date and time entered is invalid!";
-                String errorFix = "Fix: Try \"event <description> /from <yyyy-MM-dd HHmm>" 
+                String errorFix = "Fix: Try \"event <description> /from <yyyy-MM-dd HHmm>"
                         + "\n/to <yyyy-MM-dd HHmm>\" instead!";
                 String example = "Example: event project meeting /from 2025-04-07 1230\n/to 2025-04-07 1330";
                 throw new MomoException(errorDetail + "\n" + errorFix + "\n" + example);

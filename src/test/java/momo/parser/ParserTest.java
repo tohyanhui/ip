@@ -1,5 +1,15 @@
 package momo.parser;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertInstanceOf;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import java.time.LocalDateTime;
+
+import org.junit.jupiter.api.Test;
+
 import momo.command.AddDeadlineCommand;
 import momo.command.AddEventCommand;
 import momo.command.AddTodoCommand;
@@ -15,14 +25,6 @@ import momo.task.Deadline;
 import momo.task.Event;
 import momo.task.Task;
 import momo.task.Todo;
-import org.junit.jupiter.api.Test;
-import java.time.LocalDateTime;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertInstanceOf;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class ParserTest {
     @Test
@@ -36,7 +38,7 @@ public class ParserTest {
         Command command = Parser.parseToCommand("list");
         assertInstanceOf(ListCommand.class, command);
     }
-    
+
     @Test
     public void parseToCommand_todo_success() throws MomoException {
         Command command = Parser.parseToCommand("todo read book");
@@ -79,11 +81,14 @@ public class ParserTest {
         assertTrue(e.getMessage().contains("The deadline is missing \"/by\""));
     }
 
+    //CHECKSTYLE.OFF: SeparatorWrap
     @Test
     public void parseToCommand_deadlineInvalidDateTimeFormat_exceptionThrown() {
-        MomoException e = assertThrows(MomoException.class, () -> Parser.parseToCommand("deadline return book /by Monday"));
+        MomoException e = assertThrows(MomoException.class,
+                () -> Parser.parseToCommand("deadline return book /by Monday"));
         assertTrue(e.getMessage().contains("The format of date and time entered is invalid"));
     }
+    //CHECKSTYLE.ON: SeparatorWrap
 
     @Test
     public void parseToCommand_event_success() throws MomoException {
@@ -97,7 +102,7 @@ public class ParserTest {
         MomoException e = assertThrows(MomoException.class, () -> Parser.parseToCommand("event"));
         assertTrue(e.getMessage().contains("The description of the event is empty"));
     }
-    
+
     @Test
     public void parseToCommand_eventMissingFrom_exceptionThrown() {
         String trimmedInput = "event project meeting /to 2025-12-02 1400";
@@ -156,7 +161,7 @@ public class ParserTest {
         MomoException e = assertThrows(MomoException.class, () -> Parser.parseToCommand("mark two"));
         assertTrue(e.getMessage().contains("The task number provided is not an integer"));
     }
-    
+
     @Test
     public void parseToCommand_unmark_success() throws MomoException {
         String trimmedInput = "unmark 2";
@@ -187,7 +192,7 @@ public class ParserTest {
         MomoException e = assertThrows(MomoException.class, () -> Parser.parseToCommand(""));
         assertTrue(e.getMessage().contains("is not a valid command"));
     }
-    
+
     @Test
     public void parseToTask_todo_success() throws MomoException {
         Task task = Parser.parseToTask("T | 0 | read book");
@@ -196,16 +201,19 @@ public class ParserTest {
         assertFalse(task.isDone());
     }
 
+    //CHECKSTYLE.OFF: SeparatorWrap
     @Test
     public void parseToTask_deadline_success() throws MomoException {
         Task task = Parser.parseToTask("D | 1 | return book | 2025-12-02 1800");
         assertInstanceOf(Deadline.class, task);
         assertEquals("return book", task.getDescription());
         assertTrue(task.isDone());
-        assertEquals(LocalDateTime.of(2025, 12, 2, 18, 0), 
+        assertEquals(LocalDateTime.of(2025, 12, 2, 18, 0),
                 ((Deadline) task).getBy());
     }
+    //CHECKSTYLE.ON: SeparatorWrap
 
+    //CHECKSTYLE.OFF: SeparatorWrap
     @Test
     public void parseToTask_event_success() throws MomoException {
         Task task = Parser.parseToTask("E | 0 | meeting | 2025-12-02 1200 | 2025-12-02 1400");
@@ -217,6 +225,7 @@ public class ParserTest {
         assertEquals(LocalDateTime.of(2025, 12, 2, 14, 0),
                 ((Event) task).getTo());
     }
+    //CHECKSTYLE.ON: SeparatorWrap
 
     @Test
     void parseToTask_invalidTaskType_exceptionThrown() {
@@ -230,13 +239,15 @@ public class ParserTest {
         assertTrue(e.getMessage().contains("Missing data from tasks"));
     }
 
+    //CHECKSTYLE.OFF: SeparatorWrap
     @Test
     void parseToTask_invalidDateTimeFormat_exceptionThrown() {
-        MomoException e = assertThrows(MomoException.class, 
+        MomoException e = assertThrows(MomoException.class,
                 () -> Parser.parseToTask("E | 0 | meeting | Monday 2pm | 4pm"));
         assertTrue(e.getMessage().contains("Format of date and time is invalid"));
     }
-    
+    //CHECKSTYLE.ON: SeparatorWrap
+
     @Test
     public void parseToTask_emptyInput_exceptionThrown() {
         MomoException e = assertThrows(MomoException.class, () -> Parser.parseToTask(""));

@@ -1,14 +1,15 @@
 package momo.task;
 
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import java.time.LocalDateTime;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import org.junit.jupiter.api.Test;
 
 public class DeadlineTest {
     @Test
     public void toString_done() {
-        String description ="return book";
+        String description = "return book";
         LocalDateTime by = LocalDateTime.of(2025, 12, 2, 12, 0);
         boolean isDone = true;
         Deadline deadline = new Deadline(description, by, isDone);
@@ -17,7 +18,7 @@ public class DeadlineTest {
 
     @Test
     public void toString_notDone() {
-        String description ="return book";
+        String description = "return book";
         LocalDateTime by = LocalDateTime.of(2025, 12, 2, 12, 0);
         boolean isDone = false;
         Deadline deadline = new Deadline(description, by, isDone);
@@ -26,7 +27,7 @@ public class DeadlineTest {
 
     @Test
     public void convertToSaveFormat_done() {
-        String description ="return book";
+        String description = "return book";
         LocalDateTime by = LocalDateTime.of(2025, 12, 2, 12, 0);
         boolean isDone = true;
         Deadline deadline = new Deadline(description, by, isDone);
@@ -35,7 +36,7 @@ public class DeadlineTest {
 
     @Test
     public void convertToSaveFormat_notDone() {
-        String description ="return book";
+        String description = "return book";
         LocalDateTime by = LocalDateTime.of(2025, 12, 2, 12, 0);
         boolean isDone = false;
         Deadline deadline = new Deadline(description, by, isDone);
