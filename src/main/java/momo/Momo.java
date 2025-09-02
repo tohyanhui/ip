@@ -15,10 +15,10 @@ import momo.ui.Ui;
 public class Momo {
     /** Handles saving and loading tasks to/from the local file system. */
     private final Storage storage;
-    
+
     /** Stores the current list of tasks. */
     private final TaskList tasks;
-    
+
     /** Handles all user interactions and displays messages. */
     private final Ui ui;
 
@@ -40,7 +40,7 @@ public class Momo {
             ui.showInitialised();
         }
     }
-    
+
     /**
      * Runs the main loop of the application.
      * Continuously reads user commands, parses them, and executes them

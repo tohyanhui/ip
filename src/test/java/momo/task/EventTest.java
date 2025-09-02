@@ -1,14 +1,16 @@
 package momo.task;
 
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import java.time.LocalDateTime;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import org.junit.jupiter.api.Test;
+
 
 public class EventTest {
     @Test
     public void toString_done() {
-        String description ="project meeting";
+        String description = "project meeting";
         LocalDateTime from = LocalDateTime.of(2025, 12, 2, 12, 0);
         LocalDateTime to = LocalDateTime.of(2025, 12, 2, 14, 0);
         boolean isDone = true;
@@ -19,7 +21,7 @@ public class EventTest {
 
     @Test
     public void toString_notDone() {
-        String description ="project meeting";
+        String description = "project meeting";
         LocalDateTime from = LocalDateTime.of(2025, 12, 2, 12, 0);
         LocalDateTime to = LocalDateTime.of(2025, 12, 2, 14, 0);
         boolean isDone = false;
@@ -30,18 +32,18 @@ public class EventTest {
 
     @Test
     public void convertToSaveFormat_done() {
-        String description ="project meeting";
+        String description = "project meeting";
         LocalDateTime from = LocalDateTime.of(2025, 12, 2, 12, 0);
         LocalDateTime to = LocalDateTime.of(2025, 12, 2, 14, 0);
         boolean isDone = true;
         Event event = new Event(description, from, to, isDone);
-        assertEquals("E | 1 | project meeting | 2025-12-02 1200 | 2025-12-02 1400", 
+        assertEquals("E | 1 | project meeting | 2025-12-02 1200 | 2025-12-02 1400",
                 event.convertToSaveFormat());
     }
 
     @Test
     public void convertToSaveFormat_notDone() {
-        String description ="project meeting";
+        String description = "project meeting";
         LocalDateTime from = LocalDateTime.of(2025, 12, 2, 12, 0);
         LocalDateTime to = LocalDateTime.of(2025, 12, 2, 14, 0);
         boolean isDone = false;

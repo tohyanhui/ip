@@ -66,8 +66,8 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (from: " 
-                + from.format(DateTimeFormatter.ofPattern("MMM d yyyy, h:mma")) + "\nto: " 
+        return "[E]" + super.toString() + " (from: "
+                + from.format(DateTimeFormatter.ofPattern("MMM d yyyy, h:mma")) + "\nto: "
                 + to.format(DateTimeFormatter.ofPattern("MMM d yyyy, h:mma")) + ")";
     }
 
@@ -78,9 +78,9 @@ public class Event extends Task {
      */
     @Override
     public String convertToSaveFormat() {
-        return "E | " + super.convertToSaveFormat() 
+        return "E | " + super.convertToSaveFormat()
                 + String.format(" | %s | %s",
-                from.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm")), 
+                from.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm")),
                 to.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm")));
     }
 }

@@ -1,35 +1,55 @@
 package momo.command;
 
-import momo.exception.MomoException;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+
 import momo.storage.Storage;
 import momo.task.Task;
 import momo.task.TaskList;
 import momo.ui.Ui;
 
-import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
-
+/**
+ * Represents a command that finds all tasks containing a specified keyword.
+ */
 public class FindCommand implements Command {
     private final String keyword;
 
+    /**
+     * Creates a new {@code FindCommand}.
+     *
+     * @param keyword the keyword to find in task descriptions.
+     */
     public FindCommand(String keyword) {
         this.keyword = keyword;
     }
 
+    /**
+     * Executes the find command by searching the given {@link TaskList} for tasks
+     * that contain the keyword and displays the matching tasks using {@link Ui}.
+     *
+     * @param tasks the task list to search through.
+     * @param ui the user interface used to display messages.
+     * @param storage the storage component (not modified by this command).
+     */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws MomoException {
-        List<Task> foundTasks= tasks.stream()
+    public void execute(TaskList tasks, Ui ui, Storage storage) {
+        List<Task> foundTasks = tasks.stream()
                 .filter(task -> task.getDescription().contains(keyword))
                 .toList();
-        
+
         String foundTasksMessage = IntStream.range(0, foundTasks.size())
                 .mapToObj(x -> String.format("%d.%s", x + 1, foundTasks.get(x).toString()))
                 .collect(Collectors.joining("\n"));
-    
+
         ui.showPrettyMessage("Here are the matching tasks in your list:\n" + foundTasksMessage);
     }
 
+    /**
+     * Returns whether this command will exit the program.
+     *
+     * @return {@code false}, as finding tasks does not exit the program.
+     */
     @Override
     public boolean isExit() {
         return false;

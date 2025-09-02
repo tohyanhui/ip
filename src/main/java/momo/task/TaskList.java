@@ -71,7 +71,7 @@ public class TaskList {
      * @return a string representing all tasks, separated by line breaks.
      */
     public String convertToSaveFormat() {
-        return String.join(System.lineSeparator(), 
+        return String.join(System.lineSeparator(),
                 tasks.stream().map(Task::convertToSaveFormat).toList());
     }
 
