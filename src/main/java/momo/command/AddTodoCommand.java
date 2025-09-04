@@ -25,18 +25,19 @@ public class AddTodoCommand implements Command {
     /**
      * Adds a new {@link Todo} task to the task list.
      * Also saves the updated task list to storage and
-     * displays a confirmation message to the user.
+     * returns a confirmation message.
      *
      * @param tasks the task list to which the todo is added.
-     * @param ui the user interface that displays messages to the user.
+     * @param ui the user interface used to generate messages.
      * @param storage the storage handler that saves the updated task list.
+     * @return the confirmation message after successfully adding the todo.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         Task task = new Todo(description);
         tasks.addTask(task);
         storage.save(tasks);
-        ui.showAddTaskMessage(task, tasks);
+        return ui.getAddTaskMessage(task, tasks);
     }
 
     /**

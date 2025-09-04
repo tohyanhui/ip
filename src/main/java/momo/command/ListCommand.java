@@ -13,19 +13,20 @@ import momo.ui.Ui;
 public class ListCommand implements Command {
 
     /**
-     * Displays all tasks in the task list to the user.
+     * Executes the list command by returning all tasks in the task list as a string.
      * Tasks are numbered starting from 1.
      *
      * @param tasks the task list whose tasks are displayed.
-     * @param ui the user interface that displays messages to the user.
+     * @param ui the user interface used to generate messages (not used in this command).
      * @param storage the storage handler (not used in this command).
+     * @return all tasks in the task list as a string.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         String listMessage = IntStream.range(0, tasks.size())
                 .mapToObj(x -> String.format("%d.%s", x + 1, tasks.getTask(x).toString()))
                 .collect(Collectors.joining("\n"));
-        ui.showPrettyMessage("Here are the tasks in your list:\n" + listMessage);
+        return "Here are the tasks in your list:\n" + listMessage;
     }
 
     /**

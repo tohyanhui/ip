@@ -26,14 +26,15 @@ public class FindCommand implements Command {
 
     /**
      * Executes the find command by searching the given {@link TaskList} for tasks
-     * that contain the keyword and displays the matching tasks using {@link Ui}.
+     * that contain the keyword and returns the matching tasks as a string.
      *
      * @param tasks the task list to search through.
-     * @param ui the user interface used to display messages.
+     * @param ui the user interface used to generate messages (not used in this command).
      * @param storage the storage component (not modified by this command).
+     * @return the matching tasks as a string.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         List<Task> foundTasks = tasks.stream()
                 .filter(task -> task.getDescription().contains(keyword))
                 .toList();
@@ -42,7 +43,7 @@ public class FindCommand implements Command {
                 .mapToObj(x -> String.format("%d.%s", x + 1, foundTasks.get(x).toString()))
                 .collect(Collectors.joining("\n"));
 
-        ui.showPrettyMessage("Here are the matching tasks in your list:\n" + foundTasksMessage);
+        return "Here are the matching tasks in your list:\n" + foundTasksMessage;
     }
 
     /**

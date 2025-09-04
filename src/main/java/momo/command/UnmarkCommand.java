@@ -26,12 +26,13 @@ public class UnmarkCommand implements Command {
      * displays a confirmation message to the user.
      *
      * @param tasks the task list containing the task to unmark.
-     * @param ui the user interface that displays messages to the user.
+     * @param ui the user interface used to generate messages (not used in this command).
      * @param storage the storage handler that saves the updated task list.
+     * @return the confirmation message after successfully unmarking the task.
      * @throws MomoException if the specified index is invalid.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws MomoException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws MomoException {
         if (index < 0 || index >= tasks.size()) {
             String errorDetail = "The task number provided is invalid!";
             String errorFix = "Fix: Retry \"unmark <task number>\" with a valid task number!";
@@ -39,7 +40,7 @@ public class UnmarkCommand implements Command {
         }
         tasks.unmarkTask(index);
         storage.save(tasks);
-        ui.showPrettyMessage("OK, I've marked this task as not done yet:\n  " + tasks.getTask(index).toString());
+        return "OK, I've marked this task as not done yet:\n  " + tasks.getTask(index).toString();
     }
 
     /**

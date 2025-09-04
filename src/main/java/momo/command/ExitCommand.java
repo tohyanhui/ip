@@ -10,15 +10,16 @@ import momo.ui.Ui;
 public class ExitCommand implements Command {
 
     /**
-     * Displays the goodbye message to the user.
+     * Executes the exit command by returning the farewell message.
      *
      * @param tasks the task list (not used in this command).
-     * @param ui the user interface that displays messages to the user.
+     * @param ui the user interface used to generate messages.
      * @param storage the storage handler (not used in this command).
+     * @return the farewell message when exiting the application.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-        ui.showBye();
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
+        return ui.getByeMessage();
     }
 
     /**
