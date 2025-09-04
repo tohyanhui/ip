@@ -1,18 +1,13 @@
 package momo.ui;
 
-import java.util.Scanner;
-
 import momo.task.Task;
 import momo.task.TaskList;
 
 /**
  * Handles all user interactions in the Momo application.
- * Provides methods to display messages, read input, and format output.
+ * Provides methods that return messages as strings.
  */
 public class Ui {
-    /** Horizontal line used as a visual separator in messages. */
-    private static final String HORIZONTAL_LINE = "____________________________________________________________";
-
     /** ASCII art logo of Momo displayed at startup. */
     private static final String LOGO = " __  __\n"
             + "|  \\/  |\n"
@@ -22,10 +17,10 @@ public class Ui {
             + "|_|  |_|\\___/|_| |_| |_|\\___/\n";
 
     /** Message displayed when Momo is initializing. */
-    private static final String MESSAGE_INITIALISING = "Initialising Momo...";
+    private static final String MESSAGE_INITIALIZING = "Initializing Momo...";
 
     /** Message displayed after Momo has been initialized. */
-    private static final String MESSAGE_INITIALISED = "Momo initialised!";
+    private static final String MESSAGE_INITIALIZED = "Momo initialized!";
 
     /** Welcome message displayed at startup. */
     private static final String MESSAGE_WELCOME = "Hello I'm\n" + LOGO + "\n" + "What can I do for you?";
@@ -33,124 +28,101 @@ public class Ui {
     /** Farewell message displayed when exiting the application. */
     private static final String MESSAGE_BYE = "Bye. Hope to see you again soon!";
 
-    private final Scanner scanner = new Scanner(System.in);
-
-    /**
-     * Indents each line of a string with a tab character.
-     *
-     * @param text the input text
-     * @return the indented text
-     */
-    private static String indent(String text) {
-        return "\t" + text.replace("\n", "\n\t");
-    }
-
     /**
      * Adds a leading space to each line of a string.
      *
-     * @param text the input text
-     * @return the text with added spaces
+     * @param text the input text.
+     * @return the text with added spaces.
      */
     private static String space(String text) {
         return " " + text.replace("\n", "\n ");
     }
 
     /**
-     * Prints a horizontal separator line.
-     */
-    public void showLine() {
-        System.out.println(indent(HORIZONTAL_LINE));
-    }
-
-    /**
-     * Prints a formatted message with horizontal lines and indentation.
+     * Returns the farewell message when exiting the application.
      *
-     * @param message the message to display
+     * @return the farewell message as a string.
      */
-    public void showPrettyMessage(String message) {
-        showLine();
-        System.out.println(indent(space(message)));
-        showLine();
-        System.out.println();
+    public String getByeMessage() {
+        return MESSAGE_BYE;
     }
 
     /**
-     * Prints the farewell message when exiting the application.
-     */
-    public void showBye() {
-        showPrettyMessage(MESSAGE_BYE);
-    }
-
-    /**
-     * Prints the welcome message when starting the application.
-     */
-    public void showWelcome() {
-        showPrettyMessage(MESSAGE_WELCOME);
-    }
-
-    /**
-     * Displays a message indicating that the application is initializing.
-     */
-    public void showInitialising() {
-        System.out.println(MESSAGE_INITIALISING);
-    }
-
-    /**
-     * Displays a message indicating that the application has been initialized.
-     */
-    public void showInitialised() {
-        System.out.println(MESSAGE_INITIALISED);
-    }
-
-    /**
-     * Displays a message when retrieving saved tasks from disk.
-     */
-    public void showRetrievingData() {
-        System.out.println("Retrieving saved data from hard disk if any...");
-    }
-
-    /**
-     * Displays a message if loading saved data from disk fails.
-     */
-    public void showLoadingError() {
-        System.out.println("Error loading data from hard disk...\nDefaulting to fresh state...");
-    }
-
-    /**
-     * Reads a line of user input from the console.
+     * Returns the welcome message when starting the application.
      *
-     * @return the trimmed user input
+     * @return the welcome message as a string.
      */
-    public String readCommand() {
-        return scanner.nextLine().trim();
+    public String getWelcomeMessage() {
+        return MESSAGE_WELCOME;
     }
 
     /**
-     * Closes the underlying scanner.
-     */
-    public void close() {
-        scanner.close();
-    }
-
-    /**
-     * Displays a message when a task is added.
+     * Returns a message indicating that the application is initializing.
      *
-     * @param task the task that was added
-     * @param tasks the current task list
+     * @return the initializing message as a string.
      */
-    public void showAddTaskMessage(Task task, TaskList tasks) {
-        showPrettyMessage("Got it. I've added this task:\n" + space(space(task.toString()))
-                + "\nNow you have " + tasks.size() + " tasks in the list.");
+    public String getInitializingMessage() {
+        return MESSAGE_INITIALIZING;
     }
 
     /**
-     * Displays a message when a task is deleted.
+     * Returns a message indicating that the application has been initialized.
      *
-     * @param task the task that was deleted
-     * @param tasks the current task list
+     * @return the initialized message as a string.
      */
-    public void showDeleteTaskMessage(Task task, TaskList tasks) {
-        showPrettyMessage("Noted. I've removed this task:\n" + space(space(task.toString()))
-                + "\nNow you have " + tasks.size() + " tasks in the list.");
+    public String getInitializedMessage() {
+        return MESSAGE_INITIALIZED;
+    }
+
+    /**
+     * Returns a message indicating that saved tasks are being retrieved from disk.
+     *
+     * @return the retrieving data message as a string.
+     */
+    public String getRetrievingDataMessage() {
+        return "Retrieving saved data from hard disk if any...";
+    }
+
+    /**
+     * Returns a message indicating that loading saved data from disk has failed.
+     *
+     * @return the loading error message as a string.
+     */
+    public String getLoadingErrorMessage() {
+        return "Error loading data from hard disk...\nDefaulting to fresh state...";
+    }
+
+    /**
+     * Processes and returns the user's input.
+     *
+     * @param input the raw user input string.
+     * @return the trimmed user input string.
+     */
+    public String readCommand(String input) {
+        return input.trim();
+    }
+
+    /**
+     * Returns a message confirming that a task has been added.
+     *
+     * @param task the task that was added.
+     * @param tasks the current task list.
+     * @return the message confirming task addition as a string.
+     */
+    public String getAddTaskMessage(Task task, TaskList tasks) {
+        return "Got it. I've added this task:\n" + space(space(task.toString()))
+                + "\nNow you have " + tasks.size() + " tasks in the list.";
+    }
+
+    /**
+     * Returns a message confirming that a task has been deleted.
+     *
+     * @param task the task that was deleted.
+     * @param tasks the current task list.
+     * @return the message confirming task deletion as a string.
+     */
+    public String getDeleteTaskMessage(Task task, TaskList tasks) {
+        return "Noted. I've removed this task:\n" + space(space(task.toString()))
+                + "\nNow you have " + tasks.size() + " tasks in the list.";
     }
 }

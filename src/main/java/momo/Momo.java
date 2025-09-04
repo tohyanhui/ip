@@ -30,45 +30,52 @@ public class Momo {
         storage = new Storage();
         tasks = new TaskList();
         ui = new Ui();
-        ui.showInitialising();
+        ui.getInitializingMessage();
         try {
             storage.load(tasks);
-            ui.showRetrievingData();
         } catch (MomoException e) {
-            ui.showLoadingError();
+            ui.getLoadingErrorMessage();
         } finally {
-            ui.showInitialised();
+            ui.getInitializedMessage();
         }
     }
 
     /**
-     * Runs the main loop of the application.
-     * Continuously reads user commands, parses them, and executes them
-     * until an exit command is received.
-     */
-    public void run() {
-        ui.showWelcome();
-        boolean isExit = false;
-        while (!isExit) {
-            try {
-                String trimmedInput = ui.readCommand();
-                Command command = Parser.parseToCommand(trimmedInput);
-                command.execute(tasks, ui, storage);
-                isExit = command.isExit();
-            } catch (MomoException e) {
-                ui.showPrettyMessage(e.getMessage());
-            }
-        }
-        ui.close();
-    }
-
-    /**
-     * Entry point of the Momo application.
+     * Determines whether the given user input corresponds to an exit command.
      *
-     * @param args command-line arguments (not used)
+     * @param input the raw user input string.
+     * @return {@code true} if the input corresponds to a command that exits the application,
+     *         {@code false} otherwise.
      */
-    public static void main(String[] args) {
-        Momo momo = new Momo();
-        momo.run();
+    public boolean isExit(String input) {
+        try {
+            String trimmedInput = ui.readCommand(input);
+            Command command = Parser.parseToCommand(trimmedInput);
+            return command.isExit();
+        } catch (MomoException e) {
+            return false;
+        }
+    }
+
+    /**
+     * Returns the welcome message when starting the application.
+     *
+     * @return the welcome message as a string.
+     */
+    public String getWelcomeMessage() {
+        return ui.getWelcomeMessage();
+    }
+
+    /**
+     * Generates a response for the user's chat message.
+     */
+    public String getResponse(String input) {
+        try {
+            String trimmedInput = ui.readCommand(input);
+            Command command = Parser.parseToCommand(trimmedInput);
+            return command.execute(tasks, ui, storage);
+        } catch (MomoException e) {
+            return e.getMessage();
+        }
     }
 }
