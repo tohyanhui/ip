@@ -22,6 +22,8 @@ public class Momo {
     /** Handles all user interactions and displays messages. */
     private final Ui ui;
 
+    private String commandType;
+
     /**
      * Initializes the Momo application.
      * Loads tasks from storage if available and displays initialization messages.
@@ -73,9 +75,16 @@ public class Momo {
         try {
             String trimmedInput = ui.readCommand(input);
             Command command = Parser.parseToCommand(trimmedInput);
-            return command.execute(tasks, ui, storage);
+            String response = command.execute(tasks, ui, storage);
+            commandType = command.getClass().getSimpleName();
+            return response;
         } catch (MomoException e) {
+            commandType = "Error";
             return e.getMessage();
         }
+    }
+
+    public String getCommandType() {
+        return commandType;
     }
 }

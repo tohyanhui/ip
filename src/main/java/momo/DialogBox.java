@@ -46,15 +46,44 @@ public class DialogBox extends HBox {
         Collections.reverse(tmp);
         getChildren().setAll(tmp);
         setAlignment(Pos.TOP_LEFT);
+        dialog.getStyleClass().add("reply-label");
+    }
+
+    private void changeDialogStyle(String commandType) {
+        switch(commandType) {
+        case "AddDeadlineCommand":
+        case "AddEventCommand":
+        case "AddTodoCommand":
+            dialog.getStyleClass().add("add-label");
+            break;
+        case "MarkCommand":
+            dialog.getStyleClass().add("marked-label");
+            break;
+        case "UnmarkCommand":
+            dialog.getStyleClass().add("unmarked-label");
+            break;
+        case "DeleteCommand":
+            dialog.getStyleClass().add("delete-label");
+            break;
+        case "FindCommand":
+            dialog.getStyleClass().add("find-label");
+            break;
+        case "Error":
+            dialog.getStyleClass().add("error-label");
+            break;
+        default:
+            // Do nothing
+        }
     }
 
     public static DialogBox getUserDialog(String text, Image img) {
         return new DialogBox(text, img);
     }
 
-    public static DialogBox getMomoDialog(String text, Image img) {
+    public static DialogBox getMomoDialog(String text, Image img, String commandType) {
         var db = new DialogBox(text, img);
         db.flip();
+        db.changeDialogStyle(commandType);
         return db;
     }
 }

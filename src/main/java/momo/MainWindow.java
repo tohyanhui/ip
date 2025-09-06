@@ -32,7 +32,7 @@ public class MainWindow extends AnchorPane {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
         Platform.runLater(() -> {
             dialogContainer.getChildren().add(
-                    DialogBox.getMomoDialog(momo.getWelcomeMessage(), momoImage)
+                    DialogBox.getMomoDialog(momo.getWelcomeMessage(), momoImage, "Greet")
             );
         });
     }
@@ -56,9 +56,10 @@ public class MainWindow extends AnchorPane {
 
         boolean isExit = momo.isExit(input);
         String response = momo.getResponse(input);
+        String commandType = momo.getCommandType();
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
-                DialogBox.getMomoDialog(response, momoImage)
+                DialogBox.getMomoDialog(response, momoImage, commandType)
         );
         if (isExit) {
             // Delay a little to show the bye message, then exit
