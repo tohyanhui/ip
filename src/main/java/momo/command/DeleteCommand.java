@@ -34,12 +34,19 @@ public class DeleteCommand implements Command {
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws MomoException {
+        assert tasks != null : "TaskList must not be null";
+        assert ui != null : "Ui must not be null";
+        assert storage != null : "Storage must not be null";
+
         if (index < 0 || index >= tasks.size()) {
             String errorDetail = "The task number provided is invalid!";
             String errorFix = "Fix: Retry \"delete <task number>\" with a valid task number!";
             throw new MomoException(errorDetail + "\n" + errorFix);
         }
         Task deletedTask = tasks.deleteTask(index);
+
+        assert tasks.size() >= 0 : "Task list size should be non-negative after deletion";
+
         storage.save(tasks);
         return ui.getDeleteTaskMessage(deletedTask, tasks);
     }

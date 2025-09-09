@@ -19,6 +19,9 @@ public class AddTodoCommand implements Command {
      * @param description the description of the todo task.
      */
     public AddTodoCommand(String description) {
+        assert description != null : "Description must not be null";
+        assert !description.trim().isEmpty() : "Description must not be empty";
+
         this.description = description;
     }
 
@@ -34,8 +37,15 @@ public class AddTodoCommand implements Command {
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) {
+        assert tasks != null : "TaskList must not be null";
+        assert ui != null : "Ui must not be null";
+        assert storage != null : "Storage must not be null";
+
         Task task = new Todo(description);
         tasks.addTask(task);
+
+        assert tasks.size() > 0 : "Task list should not be empty after adding a todo";
+
         storage.save(tasks);
         return ui.getAddTaskMessage(task, tasks);
     }
