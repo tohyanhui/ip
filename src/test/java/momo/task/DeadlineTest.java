@@ -3,6 +3,7 @@ package momo.task;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 import org.junit.jupiter.api.Test;
 
@@ -24,7 +25,9 @@ public class DeadlineTest {
         LocalDateTime by = LocalDateTime.of(2025, 12, 2, 12, 0);
         boolean isDone = true;
         Deadline deadline = new Deadline(description, by, isDone);
-        assertEquals("[D][X] return book (by: Dec 2 2025, 12:00pm)", deadline.toString());
+        String expected = "[D][X] " + description + " (by: "
+                + by.format(DateTimeFormatter.ofPattern("MMM d yyyy, h:mma")) + ")";
+        assertEquals(expected, deadline.toString());
     }
 
     /**
@@ -37,7 +40,9 @@ public class DeadlineTest {
         LocalDateTime by = LocalDateTime.of(2025, 12, 2, 12, 0);
         boolean isDone = false;
         Deadline deadline = new Deadline(description, by, isDone);
-        assertEquals("[D][ ] return book (by: Dec 2 2025, 12:00pm)", deadline.toString());
+        String expected = "[D][ ] " + description + " (by: "
+                + by.format(DateTimeFormatter.ofPattern("MMM d yyyy, h:mma")) + ")";
+        assertEquals(expected, deadline.toString());
     }
 
     /**

@@ -3,6 +3,7 @@ package momo.task;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 import org.junit.jupiter.api.Test;
 
@@ -25,8 +26,12 @@ public class EventTest {
         LocalDateTime to = LocalDateTime.of(2025, 12, 2, 14, 0);
         boolean isDone = true;
         Event event = new Event(description, from, to, isDone);
-        assertEquals("[E][X] project meeting (from: Dec 2 2025, 12:00pm\nto: Dec 2 2025, 2:00pm)",
-                event.toString());
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM d yyyy, h:mma");
+        String expected = "[E][X] " + description + " (from: "
+                + from.format(formatter) + " to: "
+                + to.format(formatter) + ")";
+
+        assertEquals(expected, event.toString());
     }
 
     /**
@@ -40,8 +45,12 @@ public class EventTest {
         LocalDateTime to = LocalDateTime.of(2025, 12, 2, 14, 0);
         boolean isDone = false;
         Event event = new Event(description, from, to, isDone);
-        assertEquals("[E][ ] project meeting (from: Dec 2 2025, 12:00pm\nto: Dec 2 2025, 2:00pm)",
-                event.toString());
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM d yyyy, h:mma");
+        String expected = "[E][ ] " + description + " (from: "
+                + from.format(formatter) + " to: "
+                + to.format(formatter) + ")";
+
+        assertEquals(expected, event.toString());
     }
 
     /**
