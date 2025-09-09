@@ -22,6 +22,7 @@ public class Momo {
     /** Handles all user interactions and displays messages. */
     private final Ui ui;
 
+    /** Stores the type of the last executed command as a string. */
     private String commandType;
 
     /**
@@ -32,14 +33,7 @@ public class Momo {
         storage = new Storage();
         tasks = new TaskList();
         ui = new Ui();
-        ui.getInitializingMessage();
-        try {
-            storage.load(tasks);
-        } catch (MomoException e) {
-            ui.getLoadingErrorMessage();
-        } finally {
-            ui.getInitializedMessage();
-        }
+        storage.load(tasks);
     }
 
     /**
@@ -69,7 +63,15 @@ public class Momo {
     }
 
     /**
-     * Generates a response for the user's chat message.
+     * Processes user input and generates a response.
+     *
+     * <p>This method parses the input into a command, executes it, updates the
+     * {@code commandType} field for GUI styling, and returns the response string.
+     * If a {@link MomoException} occurs during parsing or execution, it returns
+     * the error message and sets {@code commandType} to "Error".</p>
+     *
+     * @param input The raw user input string.
+     * @return A string containing the response to the user input, or an error message if an exception occurs.
      */
     public String getResponse(String input) {
         try {
@@ -84,6 +86,13 @@ public class Momo {
         }
     }
 
+    /**
+     * Returns the type of the last executed command as a string.
+     *
+     * <p>This is used by the GUI to determine the appropriate styling for the dialog box.</p>
+     *
+     * @return The last command type, or "Error" if the last execution failed.
+     */
     public String getCommandType() {
         return commandType;
     }

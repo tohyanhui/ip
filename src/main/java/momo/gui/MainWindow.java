@@ -1,4 +1,4 @@
-package momo;
+package momo.gui;
 
 import javafx.application.Platform;
 import javafx.fxml.FXML;
@@ -8,6 +8,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import momo.Momo;
 
 /**
  * Controller for the main GUI.
@@ -27,6 +28,11 @@ public class MainWindow extends AnchorPane {
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private Image momoImage = new Image(this.getClass().getResourceAsStream("/images/DaMomo.png"));
 
+    /**
+     * Initializes the controller.
+     *
+     * <p>Binds the scroll pane to the dialog container height and shows Momo's welcome message.</p>
+     */
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());

@@ -1,4 +1,4 @@
-package momo;
+package momo.gui;
 
 import javafx.application.Application;
 

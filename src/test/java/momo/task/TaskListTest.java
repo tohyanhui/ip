@@ -7,20 +7,35 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+/**
+ * Unit tests for the {@link TaskList} class.
+ *
+ * <p>These tests verify that tasks can be added, deleted, retrieved, marked/unmarked,
+ * converted to save format, and cleared correctly.</p>
+ */
 public class TaskListTest {
     private TaskList tasks;
 
+    /**
+     * Initializes a new {@link TaskList} before each test.
+     */
     @BeforeEach
     public void setUp() {
         tasks = new TaskList();
     }
 
+    /**
+     * Tests that adding a task increases the size of the task list.
+     */
     @Test
     public void addTask_increasesSize() {
         tasks.addTask(new Todo("read book", false));
         assertEquals(1, tasks.size());
     }
 
+    /**
+     * Tests that deleting a task returns the correct task and removes it from the list.
+     */
     @Test
     public void deleteTask_returnsAndRemovesCorrectTask() {
         Todo todo = new Todo("read book", false);
@@ -30,6 +45,9 @@ public class TaskListTest {
         assertEquals(0, tasks.size());
     }
 
+    /**
+     * Tests that retrieving a task by index returns the correct task.
+     */
     @Test
     public void getTask_returnsCorrectTask() {
         Todo todoHomework = new Todo("do homework", false);
@@ -41,6 +59,9 @@ public class TaskListTest {
         assertEquals(todoCallJohn, tasks.getTask(1));
     }
 
+    /**
+     * Tests that marking and unmarking a task updates its completion state correctly.
+     */
     @Test
     public void markAndUnmarkTask_updatesState() {
         Todo todo = new Todo("exercise", false);
@@ -53,6 +74,10 @@ public class TaskListTest {
         assertFalse(tasks.getTask(0).isDone());
     }
 
+    /**
+     * Tests that {@link TaskList#convertToSaveFormat()} returns a string containing
+     * all tasks in the correct save format, joined by line separators.
+     */
     @Test
     public void convertToSaveFormat_returnsJoinedString() {
         tasks.addTask(new Todo("read manga", false));
@@ -61,6 +86,9 @@ public class TaskListTest {
         assertEquals(expected, tasks.convertToSaveFormat());
     }
 
+    /**
+     * Tests that clearing the task list removes all tasks and results in an empty list.
+     */
     @Test
     public void clear_removesAllTasks() {
         tasks.addTask(new Todo("pay Henry", false));

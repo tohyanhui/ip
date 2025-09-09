@@ -23,7 +23,7 @@ public class UnmarkCommand implements Command {
     /**
      * Marks the task at the specified index in the task list as not done.
      * Also saves the updated task list to storage and
-     * displays a confirmation message to the user.
+     * returns a confirmation message to the user.
      *
      * @param tasks the task list containing the task to unmark.
      * @param ui the user interface used to generate messages (not used in this command).

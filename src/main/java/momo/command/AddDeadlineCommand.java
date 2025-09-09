@@ -35,7 +35,7 @@ public class AddDeadlineCommand implements Command {
      * @param tasks the task list to which the deadline is added.
      * @param ui the user interface used to generate messages.
      * @param storage the storage handler that saves the updated task list.
-     * @return the confirmation message after successfully adding the deadline           
+     * @return the confirmation message after successfully adding the deadline
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) {
