@@ -25,6 +25,12 @@ public class AddEventCommand implements Command {
      * @param to the end date and time of the event.
      */
     public AddEventCommand(String description, LocalDateTime from, LocalDateTime to) {
+        assert description != null : "Description must not be null";
+        assert !description.trim().isEmpty() : "Description must not be empty";
+        assert from != null : "Start time must not be null";
+        assert to != null : "End time must not be null";
+        assert from.isBefore(to) : "Start time must be before end time";
+
         this.description = description;
         this.from = from;
         this.to = to;
@@ -42,8 +48,15 @@ public class AddEventCommand implements Command {
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) {
+        assert tasks != null : "TaskList must not be null";
+        assert ui != null : "Ui must not be null";
+        assert storage != null : "Storage must not be null";
+
         Task task = new Event(description, from, to);
         tasks.addTask(task);
+
+        assert tasks.size() > 0 : "Task list should not be empty after adding an event";
+
         storage.save(tasks);
         return ui.getAddTaskMessage(task, tasks);
     }

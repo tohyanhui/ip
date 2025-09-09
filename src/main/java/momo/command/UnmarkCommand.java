@@ -33,12 +33,19 @@ public class UnmarkCommand implements Command {
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws MomoException {
+        assert tasks != null : "TaskList must not be null";
+        assert ui != null : "Ui must not be null";
+        assert storage != null : "Storage must not be null";
+
         if (index < 0 || index >= tasks.size()) {
             String errorDetail = "The task number provided is invalid!";
             String errorFix = "Fix: Retry \"unmark <task number>\" with a valid task number!";
             throw new MomoException(errorDetail + "\n" + errorFix);
         }
         tasks.unmarkTask(index);
+
+        assert !tasks.getTask(index).isDone() : "Task should be marked as not done after execution";
+
         storage.save(tasks);
         return "OK, I've marked this task as not done yet:\n  " + tasks.getTask(index).toString();
     }

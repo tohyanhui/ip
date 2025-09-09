@@ -21,6 +21,9 @@ public class FindCommand implements Command {
      * @param keyword the keyword to find in task descriptions.
      */
     public FindCommand(String keyword) {
+        assert keyword != null : "Keyword must not be null";
+        assert !keyword.trim().isEmpty() : "Keyword must not be empty";
+
         this.keyword = keyword;
     }
 
@@ -35,6 +38,10 @@ public class FindCommand implements Command {
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) {
+        assert tasks != null : "TaskList must not be null";
+        assert ui != null : "Ui must not be null";
+        assert storage != null : "Storage must not be null";
+
         List<Task> foundTasks = tasks.stream()
                 .filter(task -> task.getDescription().contains(keyword))
                 .toList();

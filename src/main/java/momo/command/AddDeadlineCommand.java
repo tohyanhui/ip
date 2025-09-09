@@ -23,6 +23,10 @@ public class AddDeadlineCommand implements Command {
      * @param by the due date and time of the deadline task.
      */
     public AddDeadlineCommand(String description, LocalDateTime by) {
+        assert description != null : "Description must not be null";
+        assert !description.trim().isEmpty() : "Description must not be empty";
+        assert by != null : "Deadline date/time must not be null";
+
         this.description = description;
         this.by = by;
     }
@@ -39,8 +43,15 @@ public class AddDeadlineCommand implements Command {
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) {
+        assert tasks != null : "TaskList must not be null";
+        assert ui != null : "Ui must not be null";
+        assert storage != null : "Storage must not be null";
+
         Task task = new Deadline(description, by);
         tasks.addTask(task);
+
+        assert tasks.size() > 0 : "Task list should contain at least one task after adding a deadline";
+
         storage.save(tasks);
         return ui.getAddTaskMessage(task, tasks);
     }
