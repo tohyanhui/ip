@@ -1,4 +1,4 @@
-package momo;
+package momo.gui;
 
 import java.io.IOException;
 import java.util.Collections;
@@ -15,8 +15,12 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 
 /**
- * Represents a dialog box consisting of an ImageView to represent the speaker's face
- * and a label containing text from the speaker.
+ * Represents a dialog box containing a text label and an image.
+ *
+ * <p>The dialog box is used to display both user input and Momo's responses.
+ * User dialogs are aligned with the image on the right, while Momo's dialogs
+ * are flipped with the image on the left and styled according to the type of
+ * command executed.</p>
  */
 public class DialogBox extends HBox {
     @FXML
@@ -49,6 +53,11 @@ public class DialogBox extends HBox {
         dialog.getStyleClass().add("reply-label");
     }
 
+    /**
+     * Applies a CSS style to the dialog label based on the command type.
+     *
+     * @param commandType Type of command that triggered the response.
+     */
     private void changeDialogStyle(String commandType) {
         switch(commandType) {
         case "AddDeadlineCommand":
@@ -72,14 +81,36 @@ public class DialogBox extends HBox {
             dialog.getStyleClass().add("error-label");
             break;
         default:
-            // Do nothing
+            // No style applied for unrecognized command types
         }
     }
 
+    /**
+     * Creates a dialog box representing user input.
+     *
+     * <p>The dialog displays the text with the image on the right side and
+     * no additional styling applied.</p>
+     *
+     * @param text Text entered by the user.
+     * @param img  User's profile image.
+     * @return A dialog box containing the user's dialog.
+     */
     public static DialogBox getUserDialog(String text, Image img) {
         return new DialogBox(text, img);
     }
 
+    /**
+     * Creates a dialog box representing Momo's response.
+     *
+     * <p>The dialog is flipped horizontally with the image on the left side
+     * and styled according to the type of command executed. This distinguishes
+     * Momo's dialogs from the user's.</p>
+     *
+     * @param text Response text from Momo.
+     * @param img Momo's profile image.
+     * @param commandType Type of command that triggered the response.
+     * @return A dialog box containing Momo's styled dialog.
+     */
     public static DialogBox getMomoDialog(String text, Image img, String commandType) {
         var db = new DialogBox(text, img);
         db.flip();
