@@ -16,12 +16,6 @@ public class Ui {
             + "| |  | | (_) | | | | | | (_) |\n"
             + "|_|  |_|\\___/|_| |_| |_|\\___/\n";
 
-    /** Message displayed when Momo is initializing. */
-    private static final String MESSAGE_INITIALIZING = "Initializing Momo...";
-
-    /** Message displayed after Momo has been initialized. */
-    private static final String MESSAGE_INITIALIZED = "Momo initialized!";
-
     /** Welcome message displayed at startup. */
     private static final String MESSAGE_WELCOME = "Hello I'm\n" + LOGO + "\n" + "What can I do for you?";
 
@@ -54,42 +48,6 @@ public class Ui {
      */
     public String getWelcomeMessage() {
         return MESSAGE_WELCOME;
-    }
-
-    /**
-     * Returns a message indicating that the application is initializing.
-     *
-     * @return the initializing message as a string.
-     */
-    public String getInitializingMessage() {
-        return MESSAGE_INITIALIZING;
-    }
-
-    /**
-     * Returns a message indicating that the application has been initialized.
-     *
-     * @return the initialized message as a string.
-     */
-    public String getInitializedMessage() {
-        return MESSAGE_INITIALIZED;
-    }
-
-    /**
-     * Returns a message indicating that saved tasks are being retrieved from disk.
-     *
-     * @return the retrieving data message as a string.
-     */
-    public String getRetrievingDataMessage() {
-        return "Retrieving saved data from hard disk if any...";
-    }
-
-    /**
-     * Returns a message indicating that loading saved data from disk has failed.
-     *
-     * @return the loading error message as a string.
-     */
-    public String getLoadingErrorMessage() {
-        return "Error loading data from hard disk...\nDefaulting to fresh state...";
     }
 
     /**

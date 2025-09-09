@@ -37,12 +37,11 @@ public class Storage {
 
     /**
      * Loads tasks from the file in the local file system into the given task list.
-     * Clears the task list and throws {@link MomoException} if the saved data is invalid.
-     *
+     * If reading the file or parsing the saved data fails, the task list is cleared
+     * to prevent partial or corrupted data.
      * @param tasks the task list to load tasks into.
-     * @throws MomoException if the saved data is malformed or cannot be read.
      */
-    public void load(TaskList tasks) throws MomoException {
+    public void load(TaskList tasks) {
         Path filePath = Paths.get(DIRECTORY).resolve(FILE_NAME);
         if (!Files.exists(filePath)) {
             return;
@@ -53,11 +52,8 @@ public class Storage {
                 Task task = Parser.parseToTask(line);
                 tasks.addTask(task);
             }
-        } catch (IOException e) {
-            throw new MomoException("Unable to read saved data in hard disk");
-        } catch (MomoException e) {
+        } catch (IOException | MomoException e) {
             tasks.clear();
-            throw e;
         }
     }
 }
