@@ -33,12 +33,19 @@ public class MarkCommand implements Command {
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws MomoException {
+        assert tasks != null : "TaskList must not be null";
+        assert ui != null : "Ui must not be null";
+        assert storage != null : "Storage must not be null";
+
         if (index < 0 || index >= tasks.size()) {
             String errorDetail = "The task number provided is invalid!";
             String errorFix = "Fix: Retry \"mark <task number>\" with a valid task number!";
             throw new MomoException(errorDetail + "\n" + errorFix);
         }
         tasks.markTask(index);
+
+        assert tasks.getTask(index).isDone() : "Task should be marked as done after execution";
+
         storage.save(tasks);
         return "Nice! I've marked this task as done:\n  " + tasks.getTask(index).toString();
     }

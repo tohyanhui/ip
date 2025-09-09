@@ -23,6 +23,10 @@ public class ListCommand implements Command {
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) {
+        assert tasks != null : "TaskList must not be null";
+        assert ui != null : "Ui must not be null";
+        assert storage != null : "Storage must not be null";
+
         String listMessage = IntStream.range(0, tasks.size())
                 .mapToObj(x -> String.format("%d.%s", x + 1, tasks.getTask(x).toString()))
                 .collect(Collectors.joining("\n"));
