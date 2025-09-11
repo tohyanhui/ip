@@ -58,7 +58,7 @@ public class Deadline extends Task {
     /**
      * Converts the deadline task to a string format suitable for saving to disk.
      *
-     * @return a string in the format "D | <status> | <description> | <yyyy-MM-dd HHmm>".
+     * @return a string in the format {@code "D | <status> | <description> | <yyyy-MM-dd HHmm>"}.
      */
     @Override
     public String convertToSaveFormat() {

@@ -74,7 +74,7 @@ public class Event extends Task {
     /**
      * Converts the event task to a string format suitable for saving to disk.
      *
-     * @return a string in the format "E | <status> | <description> | <yyyy-MM-dd HHmm> | <yyyy-MM-dd HHmm>".
+     * @return a string in the format {@code "E | <status> | <description> | <yyyy-MM-dd HHmm> | <yyyy-MM-dd HHmm>"}.
      */
     @Override
     public String convertToSaveFormat() {

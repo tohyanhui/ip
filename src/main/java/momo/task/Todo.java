@@ -39,7 +39,7 @@ public class Todo extends Task {
     /**
      * Converts the todo task to a string format suitable for saving to disk.
      *
-     * @return a string in the format "T | <status> | <description>",
+     * @return a string in the format {@code "T | <status> | <description>"},
      *         where status is 1 if done, 0 if not done.
      */
     @Override

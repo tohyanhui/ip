@@ -86,7 +86,7 @@ public abstract class Task {
     /**
      * Converts the task to a string format suitable for saving to disk.
      *
-     * @return a string in the format "<status> | <description>",
+     * @return a string in the format {@code "<status> | <description>"},
      *         where status is 1 if done, 0 if not done.
      */
     public String convertToSaveFormat() {
