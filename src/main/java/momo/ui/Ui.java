@@ -17,7 +17,10 @@ public class Ui {
             + "|_|  |_|\\___/|_| |_| |_|\\___/\n";
 
     /** Welcome message displayed at startup. */
-    private static final String MESSAGE_WELCOME = "Hello I'm\n" + LOGO + "\n" + "What can I do for you?";
+    private static final String MESSAGE_WELCOME = "Hello! I'm\n"
+            + LOGO + "\n"
+            + "What can I do for you today?\n\n"
+            + "Type 'help' to see the list of available commands.\n";
 
     /** Farewell message displayed when exiting the application. */
     private static final String MESSAGE_BYE = "Bye. Hope to see you again soon!";
@@ -30,6 +33,25 @@ public class Ui {
      */
     private static String space(String text) {
         return " " + text.replace("\n", "\n ");
+    }
+
+    /**
+     * Returns a help message listing all available commands and their usage.
+     *
+     * @return a formatted string containing command descriptions.
+     */
+    public String getHelpMessage() {
+        return "Here are the available commands:\n"
+                + "  list                  - Show all tasks\n"
+                + "  todo <description>    - Add a todo task\n"
+                + "  deadline <desc> /by <yyyy-MM-dd HHmm> - Add a deadline\n"
+                + "  event <desc> /from <yyyy-MM-dd HHmm> /to <yyyy-MM-dd HHmm> - Add an event\n"
+                + "  mark <task number>    - Mark a task as done\n"
+                + "  unmark <task number>  - Unmark a task marked as done\n"
+                + "  delete <task number>  - Delete a task\n"
+                + "  find <keyword>        - Find tasks containing the keyword\n"
+                + "  help                  - Show this help message\n"
+                + "  bye                   - Exit the application";
     }
 
     /**

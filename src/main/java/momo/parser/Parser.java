@@ -11,6 +11,7 @@ import momo.command.Command;
 import momo.command.DeleteCommand;
 import momo.command.ExitCommand;
 import momo.command.FindCommand;
+import momo.command.HelpCommand;
 import momo.command.ListCommand;
 import momo.command.MarkCommand;
 import momo.command.UnmarkCommand;
@@ -49,6 +50,8 @@ public class Parser {
         String command = components[0];
 
         switch (command) {
+        case "help":
+            return new HelpCommand();
         case "bye":
             return new ExitCommand();
         case "list":
