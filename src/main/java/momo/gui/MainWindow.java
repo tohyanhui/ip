@@ -25,8 +25,8 @@ public class MainWindow extends AnchorPane {
 
     private Momo momo;
 
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private Image momoImage = new Image(this.getClass().getResourceAsStream("/images/DaMomo.png"));
+    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUserCircle.png"));
+    private Image momoImage = new Image(this.getClass().getResourceAsStream("/images/DaMomoCircle.png"));
 
     /**
      * Initializes the controller.
