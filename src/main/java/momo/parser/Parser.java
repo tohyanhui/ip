@@ -232,7 +232,7 @@ public class Parser {
      */
     private static Command parseInvalid(String trimmedInput) throws MomoException {
         String errorDetail = "\"" + trimmedInput + "\" is not a valid command!";
-        String errorFix = "Fix: Retry with a valid command!";
+        String errorFix = "Fix: Type 'help' to see the list of valid commands!";
         throw new MomoException(errorDetail + "\n" + errorFix);
     }
 
