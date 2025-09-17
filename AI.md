@@ -29,3 +29,10 @@ This document summarizes how AI tools were used in the project to assist develop
 - **Tool used:** ChatGPT
 - **Enhancement type:** Documentation
 - **Details:** Enhanced the formatting, structure, and wording of this AI.md file to clearly and concisely summarize AI-assisted enhancements in the project.
+
+---
+
+## 5. CSS Styling Improvements
+- **Tool used:** ChatGPT
+- **Enhancement type:** GUI / Frontend
+- **Details:** Improved label backgrounds by refining gradient colors, matched border colors to the gradients for better contrast, and unified text color across all labels for consistency in the pastel anime-inspired theme (pink, blue, yellow, green, lavender, red).
