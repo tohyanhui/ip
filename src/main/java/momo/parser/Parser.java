@@ -104,15 +104,14 @@ public class Parser {
      * @throws MomoException if the description, date, or "/by" is missing, or the date format is invalid.
      */
     private static Command parseDeadline(String[] components) throws MomoException {
+        String errorFix = "Fix: Try \"deadline <description> /by <yyyy-MM-dd HHmm>\" instead!";
         if (components.length < 2) {
             String errorDetail = "The description of the deadline is empty!";
-            String errorFix = "Fix: Try \"deadline <description> /by <date/time>\" instead!";
             throw new MomoException(errorDetail + "\n" + errorFix);
         }
         String[] parsedDeadline = components[1].split(" /by ", 2);
         if (parsedDeadline.length < 2) {
             String errorDetail = "The deadline is missing \"/by\"!";
-            String errorFix = "Fix: Try \"deadline <description> /by <date/time>\" instead!";
             throw new MomoException(errorDetail + "\n" + errorFix);
         }
         try {
@@ -121,7 +120,6 @@ public class Parser {
             return new AddDeadlineCommand(description, by);
         } catch (DateTimeParseException e) {
             String errorDetail = "The format of date and time entered is invalid!";
-            String errorFix = "Fix: Try \"deadline <description> /by <yyyy-MM-dd HHmm>\" instead!";
             String example = "Example: deadline return book /by 2025-04-07 1805";
             throw new MomoException(errorDetail + "\n" + errorFix + "\n" + example);
         }
@@ -135,21 +133,20 @@ public class Parser {
      * @throws MomoException if the description, "/from", or "/to" is missing, or the date format is invalid.
      */
     private static Command parseEvent(String[] components) throws MomoException {
+        String errorFix = "Fix: Try \"event <description> /from <yyyy-MM-dd HHmm>"
+                + " /to <yyyy-MM-dd HHmm>\" instead!";
         if (components.length < 2) {
             String errorDetail = "The description of the event is empty!";
-            String errorFix = "Fix: Try \"event <description> /from <date/time> /to <date/time>\" instead!";
             throw new MomoException(errorDetail + "\n" + errorFix);
         }
         String[] parsedEvent = components[1].split(" /from ", 2);
         if (parsedEvent.length < 2) {
             String errorDetail = "The event is missing \"/from\"!";
-            String errorFix = "Fix: Try \"event <description> /from <date/time> /to <date/time>\" instead!";
             throw new MomoException(errorDetail + "\n" + errorFix);
         }
         String[] parsedStartEndTime = parsedEvent[1].split(" /to ", 2);
         if (parsedStartEndTime.length < 2) {
             String errorDetail = "The event is missing \"/to\"!";
-            String errorFix = "Fix: Try \"event <description> /from <date/time> /to <date/time>\" instead!";
             throw new MomoException(errorDetail + "\n" + errorFix);
         }
         try {
@@ -159,8 +156,6 @@ public class Parser {
             return new AddEventCommand(description, from, to);
         } catch (DateTimeParseException e) {
             String errorDetail = "The format of date and time entered is invalid!";
-            String errorFix = "Fix: Try \"event <description> /from <yyyy-MM-dd HHmm>"
-                    + " /to <yyyy-MM-dd HHmm>\" instead!";
             String example = "Example: event project meeting /from 2025-04-07 1230 /to 2025-04-07 1330";
             throw new MomoException(errorDetail + "\n" + errorFix + "\n" + example);
         }

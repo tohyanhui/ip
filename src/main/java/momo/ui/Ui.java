@@ -47,7 +47,7 @@ public class Ui {
                 + "  deadline <desc> /by <yyyy-MM-dd HHmm> - Add a deadline\n"
                 + "  event <desc> /from <yyyy-MM-dd HHmm> /to <yyyy-MM-dd HHmm> - Add an event\n"
                 + "  mark <task number>    - Mark a task as done\n"
-                + "  unmark <task number>  - Unmark a task marked as done\n"
+                + "  unmark <task number>  - Mark a task as not done\n"
                 + "  delete <task number>  - Delete a task\n"
                 + "  find <keyword>        - Find tasks containing the keyword\n"
                 + "  help                  - Show this help message\n"
