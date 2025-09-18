@@ -42,16 +42,16 @@ public class Ui {
      */
     public String getHelpMessage() {
         return "Here are the available commands:\n"
-                + "  list                  - Show all tasks\n"
-                + "  todo <description>    - Add a todo task\n"
-                + "  deadline <desc> /by <yyyy-MM-dd HHmm> - Add a deadline\n"
-                + "  event <desc> /from <yyyy-MM-dd HHmm> /to <yyyy-MM-dd HHmm> - Add an event\n"
-                + "  mark <task number>    - Mark a task as done\n"
-                + "  unmark <task number>  - Mark a task as not done\n"
-                + "  delete <task number>  - Delete a task\n"
-                + "  find <keyword>        - Find tasks containing the keyword\n"
-                + "  help                  - Show this help message\n"
-                + "  bye                   - Exit the application";
+                + "1.list                  - Show all tasks\n"
+                + "2.todo <description>    - Add a todo task\n"
+                + "3.deadline <description> /by <yyyy-MM-dd HHmm> - Add a deadline\n"
+                + "4.event <description> /from <yyyy-MM-dd HHmm> /to <yyyy-MM-dd HHmm> - Add an event\n"
+                + "5.mark <task number>    - Mark a task as done\n"
+                + "6.unmark <task number>  - Mark a task as not done\n"
+                + "7.delete <task number>  - Delete a task\n"
+                + "8.find <keyword>        - Find tasks containing the keyword\n"
+                + "9.help                  - Show this help message\n"
+                + "10.bye                  - Exit the application";
     }
 
     /**
