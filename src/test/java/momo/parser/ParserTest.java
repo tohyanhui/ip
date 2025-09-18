@@ -17,6 +17,7 @@ import momo.command.Command;
 import momo.command.DeleteCommand;
 import momo.command.ExitCommand;
 import momo.command.FindCommand;
+import momo.command.HelpCommand;
 import momo.command.ListCommand;
 import momo.command.MarkCommand;
 import momo.command.UnmarkCommand;
@@ -35,6 +36,15 @@ import momo.task.Todo;
  * (ensuring {@link MomoException} is thrown with the correct message).</p>
  */
 public class ParserTest {
+
+    /**
+     * Tests that the "help" command is correctly parsed into a {@link HelpCommand}.
+     */
+    @Test
+    public void parseToCommand_help_success() throws MomoException {
+        Command command = Parser.parseToCommand("help");
+        assertInstanceOf(HelpCommand.class, command);
+    }
 
     /**
      * Tests that the "bye" command is correctly parsed into an {@link ExitCommand}.
